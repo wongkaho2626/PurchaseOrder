@@ -1289,8 +1289,32 @@ public class IRBS {
 			// data of the table
 			ArrayList<DataReportDateVendor> data = new ArrayList<DataReportDateVendor>();
 			while (connect.rs.next()) {
-//				System.out.println((int)connect.rs.getObject(1) + (String)connect.rs.getObject(2) + (String)connect.rs.getObject(3) +  (String)connect.rs.getObject(4) + (double)connect.rs.getObject(5) + (String)connect.rs.getObject(6) + (String)connect.rs.getObject(7) + (String)connect.rs.getObject(8));
 				DataReportDateVendor temp = new DataReportDateVendor((int)connect.rs.getObject(1), (String)connect.rs.getObject(2), (String)connect.rs.getObject(3),  (String)connect.rs.getObject(4), (double)connect.rs.getObject(5), (String)connect.rs.getObject(6), (String)connect.rs.getObject(7), (String)connect.rs.getObject(8), (String)connect.rs.getObject(9));
+				data.add(temp);	
+			}
+			return data;
+		}catch(Exception ex){
+			System.out.println("Error: "+ex);
+			return null;
+		}
+	}
+	
+	//report the date & vendor
+	public ArrayList<DataReportDateVendor> reportDateVendor2(String sql){
+		try{
+			connect.rs = connect.st.executeQuery(sql);
+
+			ResultSetMetaData metaData = (ResultSetMetaData) connect.rs.getMetaData();
+			Vector<String> columnNames = new Vector<String>();
+			int columnCount = metaData.getColumnCount();
+			for (int column = 1; column <= columnCount; column++) {
+				columnNames.add(metaData.getColumnName(column));
+			}
+
+			// data of the table
+			ArrayList<DataReportDateVendor> data = new ArrayList<DataReportDateVendor>();
+			while (connect.rs.next()) {
+				DataReportDateVendor temp = new DataReportDateVendor((int)connect.rs.getObject(1), (String)connect.rs.getObject(2), (String)connect.rs.getObject(3),  (String)connect.rs.getObject(4), (double)connect.rs.getObject(5), (String)connect.rs.getObject(6), (String)connect.rs.getObject(7), "0", (String)connect.rs.getObject(8));
 				data.add(temp);	
 			}
 			return data;

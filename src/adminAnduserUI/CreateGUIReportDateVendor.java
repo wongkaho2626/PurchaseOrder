@@ -41,7 +41,7 @@ public class CreateGUIReportDateVendor {
 	private JScrollPane reportScrollPane;
 	
 	CreateDateVendorReport createReport;
-	ArrayList<DataReportDateVendor> data;
+	ArrayList<DataReportDateVendor> data, data2;
 
 	public CreateGUIReportDateVendor(){
 		initUI();
@@ -180,6 +180,7 @@ public class CreateGUIReportDateVendor {
 			public void actionPerformed(ActionEvent e) {
 				if(!startOrderDateTextField.getText().equals("") && !endOrderDateTextField.getText().equals("")){
 					
+					//get the complete unit data
 					String sql = "SELECT completeunitOrderItem.poNumber, "
 							+ "completeunitOrderItem.subCode, completeunitOrderItem.PRODUCT, "
 							+ "maintenance.DESCRIPTION, completeunitOrderItem.price, "
@@ -191,17 +192,38 @@ public class CreateGUIReportDateVendor {
 							+ "AND completeunitPurchaseOrder.orderDate >= STR_TO_DATE(\'"+ startOrderDateTextField.getText() + "\', '%m/%d/%Y') "
 							+ "AND completeunitPurchaseOrder.orderDate <= STR_TO_DATE(\'" + endOrderDateTextField.getText() + "\', '%m/%d/%Y') ";
 					
+					//check is there are vendor condition
 					if(!StringUtils.isEmptyOrWhitespaceOnly(selectVendorComboBox.getSelectedItem().toString())){
 						sql = sql + "AND completeunitPurchaseOrder.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' ";
 					}
-							
 					sql = sql + "ORDER BY completeunitOrderItem.poNumber ASC";
+					
+					//get the spare part data
+					String sql2 = "SELECT sparepartOrderItem.poNumber, "
+							+ "sparepartOrderItem.subCode, sparepartOrderItem.PRODUCT, "
+							+ "maintenance.DESCRIPTION, sparepartOrderItem.price, "
+							+ "sparepartOrderItem.fixedcost, maintenance.DUTY_CODE, "
+							+ "maintenance.vendor "
+							+ "FROM sparepartPurchaseOrder, sparepartOrderItem, maintenance "
+							+ "WHERE sparepartOrderItem.poNumber = sparepartPurchaseOrder.poNumber "
+							+ "AND sparepartOrderItem.PRODUCT = maintenance.PRODUCT "
+							+ "AND sparepartPurchaseOrder.orderDate >= STR_TO_DATE(\'"+ startOrderDateTextField.getText() + "\', '%m/%d/%Y') "
+							+ "AND sparepartPurchaseOrder.orderDate <= STR_TO_DATE(\'" + endOrderDateTextField.getText() + "\', '%m/%d/%Y') ";
+					
+					//check is there are vendor condition
+					if(!StringUtils.isEmptyOrWhitespaceOnly(selectVendorComboBox.getSelectedItem().toString())){
+						sql2 = sql2 + "AND sparepartPurchaseOrder.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' ";
+					}
+					sql2 = sql2 + "ORDER BY sparepartOrderItem.poNumber ASC";
+					
 					IRBS irbs = new IRBS();
 					data = new ArrayList<DataReportDateVendor>();
+					data2 = new ArrayList<DataReportDateVendor>();
 					data = irbs.reportDateVendor(sql);
+					data2 = irbs.reportDateVendor2(sql2);
+					data.addAll(data2);
 					createReport = new CreateDateVendorReport(data, startOrderDateTextField.getText(), endOrderDateTextField.getText());
 					
-						System.out.println(sql);
 					startOrderDateTextField.setText(null);
 					endOrderDateTextField.setText(null);
 					try {
