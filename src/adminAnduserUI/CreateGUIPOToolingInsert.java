@@ -47,12 +47,11 @@ public class CreateGUIPOToolingInsert {
 	private JTextField[] poInsertToolingProductNoTextField = new JTextField[100];
 	private JTextField[] poInsertToolingProductPriceTextField = new JTextField[100];
 	private JTextField[] poInsertToolingProductQuantityTextField = new JTextField[100];
-	private JTextField[] poInsertToolingProductFixedCostTextField = new JTextField[100];
 	private JTextField poInsertToolingVendorTextField;
+	private JTextField poInsertToolingDepositTextField;
 	private JTextField[] poInsertToolingOrderDateTextField = new JTextField[100];
 	private JTextField[] poInsertToolingACRONYMTextField = new JTextField[100];
 	private JTextField[] poInsertToolingDescriptionTextField = new JTextField[100];
-	private JTextField[] poInsertToolingDutyCodeTextField = new JTextField[100];
 	private JTextField poInsertToolingTotalQuantityTextField;
 	private JTextField poInsertToolingTotalPriceTextField;
 	private JTextField poInsertToolingCompletionTextField;
@@ -97,7 +96,7 @@ public class CreateGUIPOToolingInsert {
 		gbc.insets = new Insets(5, 5, 5, 5);
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
-		gbc.gridwidth = 8;
+		gbc.gridwidth = 9;
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		poInsertToolingPanel.add(new JSeparator(JSeparator.HORIZONTAL), gbc);
@@ -165,9 +164,15 @@ public class CreateGUIPOToolingInsert {
 		gbc.gridy = 3;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
-		poInsertToolingLabel = new JLabel("Tooling Completion");
+		poInsertToolingLabel = new JLabel("Deposit");
 		gbc.gridwidth = 1;
 		gbc.gridx = 7;
+		gbc.gridy = 3;
+		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
+		
+		poInsertToolingLabel = new JLabel("Tooling Completion");
+		gbc.gridwidth = 1;
+		gbc.gridx = 8;
 		gbc.gridy = 3;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
@@ -310,9 +315,15 @@ public class CreateGUIPOToolingInsert {
 		poInsertToolingTotalPriceTextField.setEditable(false);
 		poInsertToolingPanel.add(poInsertToolingTotalPriceTextField, gbc);
 		
-		poInsertToolingCompletionTextField = new JTextField();
+		poInsertToolingDepositTextField = new JTextField();
 		gbc.gridwidth = 1;
 		gbc.gridx = 7;
+		gbc.gridy = 4;
+		poInsertToolingPanel.add(poInsertToolingDepositTextField, gbc);
+		
+		poInsertToolingCompletionTextField = new JTextField();
+		gbc.gridwidth = 1;
+		gbc.gridx = 8;
 		gbc.gridy = 4;
 		poInsertToolingCompletionTextField.addKeyListener(new KeyListener(){
 			@Override
@@ -337,7 +348,7 @@ public class CreateGUIPOToolingInsert {
 		});
 		poInsertToolingPanel.add(poInsertToolingCompletionTextField, gbc);
 		
-		gbc.gridwidth = 8;
+		gbc.gridwidth = 9;
 		gbc.gridx = 0;
 		gbc.gridy = 52;
 		poInsertToolingPanel.add(new JSeparator(JSeparator.HORIZONTAL), gbc);
@@ -355,28 +366,16 @@ public class CreateGUIPOToolingInsert {
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 
 		poInsertToolingLabel = new JLabel("Description");
-		gbc.gridwidth = 4;
+		gbc.gridwidth = 5;
 		gbc.gridx = 3;
 		gbc.gridy = 54;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
 		poInsertToolingLabel = new JLabel("Unit Price");
 		gbc.gridwidth = 1;
-		gbc.gridx = 7;
+		gbc.gridx = 8;
 		gbc.gridy = 54;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
-		
-//		poInsertToolingLabel = new JLabel("Fixed Cost");
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 8;
-//		gbc.gridy = 53;
-//		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
-//		
-//		poInsertToolingLabel = new JLabel("Duty Code");
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 9;
-//		gbc.gridy = 53;
-//		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
 		poInsertToolingIncreaseProductButton = new JButton("Increase");
 		gbc.gridwidth = 1;
@@ -402,11 +401,6 @@ public class CreateGUIPOToolingInsert {
 						public void keyReleased(KeyEvent e) {
 							for(int i=0; i <= cntToolingProduct; i++){
 								IRBS irbs = new IRBS();
-								String [] maintenanceStatement = irbs.maintenanceStatement(poInsertToolingProductNoTextField[i].getText());
-								if(!poInsertToolingProductNoTextField[i].getText().equals("")){
-									poInsertToolingDescriptionTextField[i].setText(maintenanceStatement[1]);	
-									poInsertToolingDutyCodeTextField[i].setText(maintenanceStatement[2]);	
-								}
 								if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
 									if(poInsertToolingProductNoTextField[i].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[i].getText()) == false){
 										poInsertToolingProductNoTextField[i].setText(poInsertToolingProductNoTextField[i].getText() + "-");
@@ -454,15 +448,14 @@ public class CreateGUIPOToolingInsert {
 					poInsertToolingPanel.add(poInsertToolingProductQuantityTextField[cntToolingProduct], gbc);
 					
 					poInsertToolingDescriptionTextField[cntToolingProduct] = new JTextField();
-					poInsertToolingDescriptionTextField[cntToolingProduct].setEditable(false);
-					gbc.gridwidth = 4;
+					gbc.gridwidth = 5;
 					gbc.gridx = 3;
 					gbc.gridy = gbccntToolingProduct;
 					poInsertToolingPanel.add(poInsertToolingDescriptionTextField[cntToolingProduct], gbc);
 
 					poInsertToolingProductPriceTextField[cntToolingProduct]  = new JTextField();
 					gbc.gridwidth = 1;
-					gbc.gridx = 7;
+					gbc.gridx = 8;
 					gbc.gridy = gbccntToolingProduct;
 					poInsertToolingProductPriceTextField[cntToolingProduct].addKeyListener(new KeyListener(){
 						@Override
@@ -475,25 +468,13 @@ public class CreateGUIPOToolingInsert {
 						public void keyReleased(KeyEvent e) {
 							
 							setPrice();
+							changePriceFormat(poInsertToolingProductPriceTextField[cntToolingProduct]);
 							
 							poInsertToolingPanel.revalidate();  
 							poInsertToolingPanel.repaint();
 						}
 					});
 					poInsertToolingPanel.add(poInsertToolingProductPriceTextField[cntToolingProduct], gbc);
-					
-					poInsertToolingProductFixedCostTextField[cntToolingProduct] = new JTextField();
-//					gbc.gridwidth = 1;
-//					gbc.gridx = 8;
-//					gbc.gridy = gbccntToolingProduct;
-//					poInsertToolingPanel.add(poInsertToolingProductFixedCostTextField[cntToolingProduct], gbc);
-					
-					poInsertToolingDutyCodeTextField[cntToolingProduct] = new JTextField();
-//					poInsertToolingDutyCodeTextField[cntToolingProduct].setEditable(false);
-//					gbc.gridwidth = 1;
-//					gbc.gridx = 9;
-//					gbc.gridy = gbccntToolingProduct;
-//					poInsertToolingPanel.add(poInsertToolingDutyCodeTextField[cntToolingProduct], gbc);
 					
 					poInsertToolingPanel.revalidate();  
 					poInsertToolingPanel.repaint();
@@ -521,9 +502,7 @@ public class CreateGUIPOToolingInsert {
 					poInsertToolingPanel.remove(poInsertToolingProductNoTextField[cntToolingProduct]);
 					poInsertToolingPanel.remove(poInsertToolingProductQuantityTextField[cntToolingProduct]);
 					poInsertToolingPanel.remove(poInsertToolingProductPriceTextField[cntToolingProduct]);
-					poInsertToolingPanel.remove(poInsertToolingProductFixedCostTextField[cntToolingProduct]);
 					poInsertToolingPanel.remove(poInsertToolingDescriptionTextField[cntToolingProduct]);
-					poInsertToolingPanel.remove(poInsertToolingDutyCodeTextField[cntToolingProduct]);
 					cntToolingProduct--;
 					gbccntToolingProduct--;
 				}else{
@@ -560,8 +539,6 @@ public class CreateGUIPOToolingInsert {
 				String [] maintenanceStatement = irbs.maintenanceStatement(poInsertToolingProductNoTextField[0].getText());
 				if(!poInsertToolingProductNoTextField[0].getText().equals("")){
 					poInsertToolingACRONYMTextField[0].setText(maintenanceStatement[0]);	
-					poInsertToolingDescriptionTextField[0].setText(maintenanceStatement[1]);	
-					poInsertToolingDutyCodeTextField[0].setText(maintenanceStatement[2]);	
 				}
 				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
 					if(poInsertToolingProductNoTextField[0].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[0].getText()) == false){
@@ -608,15 +585,14 @@ public class CreateGUIPOToolingInsert {
 		poInsertToolingPanel.add(poInsertToolingProductQuantityTextField[0], gbc);
 		
 		poInsertToolingDescriptionTextField[0] = new JTextField();
-		poInsertToolingDescriptionTextField[0].setEditable(false);
-		gbc.gridwidth = 4;
+		gbc.gridwidth = 5;
 		gbc.gridx = 3;
 		gbc.gridy = 55;
 		poInsertToolingPanel.add(poInsertToolingDescriptionTextField[0], gbc);
 		
 		poInsertToolingProductPriceTextField[0] = new JTextField();
 		gbc.gridwidth = 1;
-		gbc.gridx = 7;
+		gbc.gridx = 8;
 		gbc.gridy = 55;
 		poInsertToolingProductPriceTextField[0].addKeyListener(new KeyListener(){
 			@Override
@@ -628,6 +604,7 @@ public class CreateGUIPOToolingInsert {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				setPrice();
+				changePriceFormat(poInsertToolingProductPriceTextField[0]);
 
 				poInsertToolingPanel.revalidate();  
 				poInsertToolingPanel.repaint();
@@ -635,27 +612,14 @@ public class CreateGUIPOToolingInsert {
 		});
 		poInsertToolingPanel.add(poInsertToolingProductPriceTextField[0], gbc);
 		
-		poInsertToolingProductFixedCostTextField[0] = new JTextField();
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 8;
-//		gbc.gridy = 55;
-//		poInsertToolingPanel.add(poInsertToolingProductFixedCostTextField[0], gbc);
-		
-		poInsertToolingDutyCodeTextField[0] = new JTextField();
-//		poInsertToolingDutyCodeTextField[0].setEditable(false);
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 9;
-//		gbc.gridy = 55;
-//		poInsertToolingPanel.add(poInsertToolingDutyCodeTextField[0], gbc);
-		
-		gbc.gridwidth = 8;
+		gbc.gridwidth = 9;
 		gbc.gridx = 0;
 		gbc.gridy = 199999;
 		poInsertToolingPanel.add(new JSeparator(JSeparator.HORIZONTAL), gbc);
 		
 		poInsertToolingProductButton = new JButton("Save");
 		gbc.gridwidth = 2;
-		gbc.gridx = 6;
+		gbc.gridx = 7;
 		gbc.gridy = 200000;
 		poInsertToolingProductButton.addActionListener(new ActionListener(){
 			@Override
@@ -682,7 +646,7 @@ public class CreateGUIPOToolingInsert {
 								String ChangedDate, ToolingCompletion;
 								ToolingCompletion = poInsertToolingCompletionTextField.getText().substring(6, 8) + "/" + poInsertToolingCompletionTextField.getText().substring(0, 2) + "/" + poInsertToolingCompletionTextField.getText().substring(3, 5);
 								ChangedDate = poInsertToolingOrderDateTextField[0].getText().substring(6, 8) + "/" + poInsertToolingOrderDateTextField[0].getText().substring(0, 2) + "/" + poInsertToolingOrderDateTextField[0].getText().substring(3, 5);
-								irbs.insertToolingPO(Integer.parseInt(poInsertToolingNoTextField.getText()), ChangedDate, poInsertToolingVendorTextField.getText(), poInsertToolingRemarkTextArea.getText(), ToolingCompletion, CustomerNameItem.getCustomerNameId(customerName.getSelectedItem().toString()));
+								irbs.insertToolingPO(Integer.parseInt(poInsertToolingNoTextField.getText()), ChangedDate, poInsertToolingVendorTextField.getText(), poInsertToolingRemarkTextArea.getText(), ToolingCompletion, CustomerNameItem.getCustomerNameId(customerName.getSelectedItem().toString()), poInsertToolingDepositTextField.getText());
 								if(cntToolingOrderDate > 0){
 									for(int i = 1; i <= cntToolingOrderDate; i++){
 										ChangedDate = poInsertToolingOrderDateTextField[i].getText().substring(6, 8) + "/" + poInsertToolingOrderDateTextField[i].getText().substring(0, 2) + "/" + poInsertToolingOrderDateTextField[i].getText().substring(3, 5);
@@ -690,7 +654,7 @@ public class CreateGUIPOToolingInsert {
 									}
 								}
 								for(int i = 0; i <= cntToolingProduct; i++){
-									irbs.insertToolingOrderItem(Integer.parseInt(poInsertToolingNoTextField.getText()), poInsertToolingProductNoTextField[i].getText(), Integer.parseInt(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertToolingProductPriceTextField[i].getText()), poInsertToolingProductFixedCostTextField[i].getText());
+									irbs.insertToolingOrderItem(Integer.parseInt(poInsertToolingNoTextField.getText()), poInsertToolingProductNoTextField[i].getText(), Integer.parseInt(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", "")), poInsertToolingDescriptionTextField[i].getText());
 								}
 								poInsertReset();
 								JOptionPane
@@ -788,8 +752,8 @@ public class CreateGUIPOToolingInsert {
 				check = false;
 			if(poInsertToolingProductPriceTextField[i].getText().equals(""))
 				check = false;
-//			if(poInsertToolingProductFixedCostTextField[i].getText().equals(""))
-//				check = false;
+			if(poInsertToolingDescriptionTextField[i].getText().equals(""))
+				check = false;
 		}
 		return check;
 	}
@@ -835,9 +799,7 @@ public class CreateGUIPOToolingInsert {
 			poInsertToolingPanel.remove(poInsertToolingProductNoTextField[i]);
 			poInsertToolingPanel.remove(poInsertToolingProductQuantityTextField[i]);
 			poInsertToolingPanel.remove(poInsertToolingProductPriceTextField[i]);
-			poInsertToolingPanel.remove(poInsertToolingProductFixedCostTextField[i]);
 			poInsertToolingPanel.remove(poInsertToolingDescriptionTextField[i]);
-			poInsertToolingPanel.remove(poInsertToolingDutyCodeTextField[i]);
 		}
 		
 		cntToolingOrderDate = 0;
@@ -850,13 +812,12 @@ public class CreateGUIPOToolingInsert {
 		poInsertToolingVendorTextField.setText(null);
 		poInsertToolingACRONYMTextField[0].setText(null);
 		poInsertToolingDescriptionTextField[0].setText(null);
-		poInsertToolingDutyCodeTextField[0].setText(null);
 		poInsertToolingTotalQuantityTextField.setText("0");
 		poInsertToolingTotalPriceTextField.setText("0.00");
+		poInsertToolingDepositTextField.setText(null);
 		poInsertToolingProductNoTextField[0].setText(null);
 		poInsertToolingProductQuantityTextField[0].setText(null);
 		poInsertToolingProductPriceTextField[0].setText(null);
-		poInsertToolingProductFixedCostTextField[0].setText(null);
 		poInsertToolingCompletionTextField.setText(null);
 		poInsertToolingRemarkTextArea.setText(null);
 		poInsertToolingRemarkTextArea.setBackground(Color.WHITE);
@@ -936,9 +897,9 @@ public class CreateGUIPOToolingInsert {
 		poInsertToolingTotalQuantityTextField.setText(nf.format(totalquantity));
 
 		for( int i = 0; i <= cntToolingProduct; i++){
-			if(!poInsertToolingProductQuantityTextField[i].getText().equals("") && !notInteger(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")) && !poInsertToolingProductPriceTextField[i].getText().equals("") && !notDouble(poInsertToolingProductPriceTextField[i].getText())){
+			if(!poInsertToolingProductQuantityTextField[i].getText().equals("") && !notInteger(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")) && !poInsertToolingProductPriceTextField[i].getText().replace(",", "").equals("") && !notDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", ""))){
 				quantity[i] = Integer.parseInt(poInsertToolingProductQuantityTextField[i].getText().replace(",", ""));
-				price[i] = Double.parseDouble(poInsertToolingProductPriceTextField[i].getText());
+				price[i] = Double.parseDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", ""));
 				totalprice[i] = quantity[i] * price[i];
 			}
 		}
@@ -959,9 +920,9 @@ public class CreateGUIPOToolingInsert {
 
 
 		for( int i = 0; i <= cntToolingProduct; i++){
-			if(!poInsertToolingProductQuantityTextField[i].getText().equals("") && !notInteger(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")) && !poInsertToolingProductPriceTextField[i].getText().equals("") && !notDouble(poInsertToolingProductPriceTextField[i].getText())){
+			if(!poInsertToolingProductQuantityTextField[i].getText().equals("") && !notInteger(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")) && !poInsertToolingProductPriceTextField[i].getText().replace(",", "").equals("") && !notDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", ""))){
 				quantity[i] = Integer.parseInt(poInsertToolingProductQuantityTextField[i].getText().replace(",", ""));
-				price[i] = Double.parseDouble(poInsertToolingProductPriceTextField[i].getText());
+				price[i] = Double.parseDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", ""));
 				totalprice[i] = quantity[i] * price[i];
 			}
 		}
@@ -971,6 +932,11 @@ public class CreateGUIPOToolingInsert {
 		DecimalFormat nf = new DecimalFormat("###,###,###,###,##0.00");
 
 		poInsertToolingTotalPriceTextField.setText(nf.format(tp));
+	}
+	
+	private void changePriceFormat(JTextField textField) {
+		DecimalFormat nf = new DecimalFormat("###,###,###,###,###");
+		textField.setText(nf.format(Integer.parseInt(textField.getText().replace(",", ""))));
 	}
 }
 

@@ -46,6 +46,7 @@ public class CreateGUIViewerPOViewTooling {
 	private JTextField[] poInsertToolingProductQuantityTextField = new JTextField[100];
 	private JTextField[] poInsertToolingProductFixedCostTextField = new JTextField[100];
 	private JTextField poInsertToolingVendorTextField;
+	private JTextField poInsertToolingDepositTextField;
 	private JTextField[] poInsertToolingOrderDateTextField = new JTextField[100];
 	private JTextField[] poInsertToolingACRONYMTextField = new JTextField[100];
 	private JTextField[] poInsertToolingDescriptionTextField = new JTextField[100];
@@ -69,6 +70,7 @@ public class CreateGUIViewerPOViewTooling {
 	private String remark;
 	private String completion;
 	private String getCustomerName;
+	private String deposit;
 	private String[] toolingPurchaseOrderStatement;
 	private ArrayList<String> toolingOrderDateStatement;
 	private ArrayList<DataToolingOrderItem> toolingOrderItemStatement;
@@ -106,6 +108,7 @@ public class CreateGUIViewerPOViewTooling {
 		remark = toolingPurchaseOrderStatement[2];
 		completion = toolingPurchaseOrderStatement[3];
 		getCustomerName = toolingPurchaseOrderStatement[4];
+		deposit = toolingPurchaseOrderStatement[5];
 		
 		toolingOrderDateStatement = irbs.toolingOrderDateStatement(Integer.parseInt(poNumber));
 		cntToolingOrderDate = cntToolingOrderDate + toolingOrderDateStatement.size();
@@ -199,9 +202,15 @@ public class CreateGUIViewerPOViewTooling {
 		gbc.gridy = 2;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
-		poInsertToolingLabel = new JLabel("Tooling Completion");
+		poInsertToolingLabel = new JLabel("Deposit");
 		gbc.gridwidth = 1;
 		gbc.gridx = 6;
+		gbc.gridy = 2;
+		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
+		
+		poInsertToolingLabel = new JLabel("Tooling Completion");
+		gbc.gridwidth = 1;
+		gbc.gridx = 7;
 		gbc.gridy = 2;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
@@ -296,10 +305,17 @@ public class CreateGUIViewerPOViewTooling {
 		poInsertToolingTotalPriceTextField.setEditable(false);
 		poInsertToolingPanel.add(poInsertToolingTotalPriceTextField, gbc);
 		
+		poInsertToolingDepositTextField = new JTextField(deposit);
+		gbc.gridwidth = 1;
+		gbc.gridx = 6;
+		gbc.gridy = 4;
+		poInsertToolingDepositTextField.setEditable(false);
+		poInsertToolingPanel.add(poInsertToolingDepositTextField, gbc);
+		
 		poInsertToolingCompletionTextField = new JTextField(completion);
 		poInsertToolingCompletionTextField.setEditable(false);
 		gbc.gridwidth = 1;
-		gbc.gridx = 6;
+		gbc.gridx = 7;
 		gbc.gridy = 4;
 		poInsertToolingCompletionTextField.addKeyListener(new KeyListener(){
 			@Override
@@ -340,28 +356,16 @@ public class CreateGUIViewerPOViewTooling {
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 
 		poInsertToolingLabel = new JLabel("Description");
-		gbc.gridwidth = 4;
+		gbc.gridwidth = 5;
 		gbc.gridx = 2;
 		gbc.gridy = 53;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
 		poInsertToolingLabel = new JLabel("Unit Price");
 		gbc.gridwidth = 1;
-		gbc.gridx = 6;
+		gbc.gridx = 7;
 		gbc.gridy = 53;
 		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
-		
-//		poInsertToolingLabel = new JLabel("Fixed Cost");
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 7;
-//		gbc.gridy = 53;
-//		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
-//		
-//		poInsertToolingLabel = new JLabel("Duty Code");
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 8;
-//		gbc.gridy = 53;
-//		poInsertToolingPanel.add(poInsertToolingLabel, gbc);
 		
 		for(int i = 0; i < toolingOrderItemStatement.size(); i++){
 			poInsertToolingProductNoTextField[i] = new JTextField(toolingOrderItemStatement.get(i).getPRODUCT());
@@ -422,9 +426,9 @@ public class CreateGUIViewerPOViewTooling {
 			});
 			poInsertToolingPanel.add(poInsertToolingProductQuantityTextField[i], gbc);
 
-			poInsertToolingDescriptionTextField[i] = new JTextField();
+			poInsertToolingDescriptionTextField[i] = new JTextField(toolingOrderItemStatement.get(i).getDescription());
 			poInsertToolingDescriptionTextField[i].setEditable(false);
-			gbc.gridwidth = 4;
+			gbc.gridwidth = 5;
 			gbc.gridx = 2;
 			gbc.gridy = 55 + i;
 			poInsertToolingPanel.add(poInsertToolingDescriptionTextField[i], gbc);
@@ -432,7 +436,7 @@ public class CreateGUIViewerPOViewTooling {
 			poInsertToolingProductPriceTextField[i] = new JTextField(toolingOrderItemStatement.get(i).getPrice());
 			poInsertToolingProductPriceTextField[i].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 6;
+			gbc.gridx = 7;
 			gbc.gridy = 55 + i;
 			poInsertToolingProductPriceTextField[i].addKeyListener(new KeyListener(){
 				@Override
@@ -450,20 +454,6 @@ public class CreateGUIViewerPOViewTooling {
 				}
 			});
 			poInsertToolingPanel.add(poInsertToolingProductPriceTextField[i], gbc);
-
-			poInsertToolingProductFixedCostTextField[i] = new JTextField(toolingOrderItemStatement.get(i).getFixedcost());
-//			poInsertToolingProductFixedCostTextField[i].setEditable(false);
-//			gbc.gridwidth = 1;
-//			gbc.gridx = 7;
-//			gbc.gridy = 55 + i;
-//			poInsertToolingPanel.add(poInsertToolingProductFixedCostTextField[i], gbc);
-
-			poInsertToolingDutyCodeTextField[i] = new JTextField();
-//			poInsertToolingDutyCodeTextField[i].setEditable(false);
-//			gbc.gridwidth = 1;
-//			gbc.gridx = 8;
-//			gbc.gridy = 55 + i;
-//			poInsertToolingPanel.add(poInsertToolingDutyCodeTextField[i], gbc);
 		}
 		
 		gbc.gridwidth = 9;
@@ -588,6 +578,7 @@ public class CreateGUIViewerPOViewTooling {
 		poInsertToolingNoTextField.setText(null);
 		poInsertToolingOrderDateTextField[0].setText(null);
 		poInsertToolingVendorTextField.setText(null);
+		poInsertToolingDepositTextField.setText(null);
 		poInsertToolingACRONYMTextField[0].setText(null);
 		poInsertToolingDescriptionTextField[0].setText(null);
 		poInsertToolingDutyCodeTextField[0].setText(null);
@@ -664,11 +655,6 @@ public class CreateGUIViewerPOViewTooling {
 		maintenanceStatement = irbs.maintenanceStatement(poInsertToolingProductNoTextField[0].getText());
 		poInsertToolingACRONYMTextField[0].setText(maintenanceStatement[0]);	
 		
-		maintenanceStatement = irbs.maintenanceStatement(poInsertToolingProductNoTextField[i].getText());
-		if(!poInsertToolingProductNoTextField[i].getText().equals("")){
-			poInsertToolingDescriptionTextField[i].setText(maintenanceStatement[1]);	
-			poInsertToolingDutyCodeTextField[i].setText(maintenanceStatement[2]);	
-		}
 		try {
 			irbs.getCon().close();
 		} catch (SQLException e) {

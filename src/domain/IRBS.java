@@ -833,8 +833,8 @@ public class IRBS {
 	}
 	
 	//insert the Purchase Order of the Tooling Purchase Order
-	public void insertToolingPO(int poNumber, String orderDate, String vendor, String remark, String completion, String customerName) throws SQLException{
-		String sql = ("INSERT INTO toolingPurchaseOrder (poNumber, orderDate, vendor, remark, completion, customerName) VALUES (?, ?, ?, ?, ?, ?)");
+	public void insertToolingPO(int poNumber, String orderDate, String vendor, String remark, String completion, String customerName, String deposit) throws SQLException{
+		String sql = ("INSERT INTO toolingPurchaseOrder (poNumber, orderDate, vendor, remark, completion, customerName, deposit) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		java.sql.PreparedStatement updateQuery = connect.con.prepareStatement(sql);
 		updateQuery.setInt(1, poNumber);
 		updateQuery.setString(2, orderDate);
@@ -842,6 +842,7 @@ public class IRBS {
 		updateQuery.setString(4, remark);
 		updateQuery.setString(5, completion);
 		updateQuery.setString(6, customerName);
+		updateQuery.setString(7, deposit);
 		updateQuery.executeUpdate();
 		System.out.println(updateQuery);
 	}
@@ -857,16 +858,16 @@ public class IRBS {
 	}
 	
 	//insert the Order Item of the Tooling Purchase Order
-	public void insertToolingOrderItem(int poNumber, String PRODUCT, int quantity, double price, String fixedcost) throws SQLException{
-		String sql = ("INSERT INTO toolingOrderItem (poNumber, PRODUCT, quantity, price, fixedcost) VALUES (?, ?, ?, ?, ?)");
+	public void insertToolingOrderItem(int poNumber, String PRODUCT, int quantity, double price, String description) throws SQLException{
+		String sql = ("INSERT INTO toolingOrderItem (poNumber, PRODUCT, quantity, price, description) VALUES (?, ?, ?, ?, ?)");
 		java.sql.PreparedStatement updateQuery = connect.con.prepareStatement(sql);
 		updateQuery.setInt(1, poNumber);
 		updateQuery.setString(2, PRODUCT);
 		updateQuery.setInt(3, quantity);
 		updateQuery.setDouble(4, price);
-		updateQuery.setString(5, fixedcost);
-		updateQuery.executeUpdate();
+		updateQuery.setString(5, description);
 		System.out.println(updateQuery);
+		updateQuery.executeUpdate();
 	}
 	
 	//insert the Purchase Order of the Misc Purchase Order
@@ -1124,9 +1125,9 @@ public class IRBS {
 	
 	//select the toolingPurchaseOrder
 	public String[] toolingPurchaseOrderStatement(int poNumber){
-		String[] toolingPurchaseOrderStatement = new String[5];
+		String[] toolingPurchaseOrderStatement = new String[6];
 		try{
-			String sql = ("SELECT DATE_FORMAT(toolingPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate, vendor, remark, DATE_FORMAT(toolingPurchaseOrder.completion, '%m/%d/%y') AS completion, customerName FROM toolingPurchaseOrder" + " WHERE poNumber = " + poNumber);
+			String sql = ("SELECT DATE_FORMAT(toolingPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate, vendor, remark, DATE_FORMAT(toolingPurchaseOrder.completion, '%m/%d/%y') AS completion, customerName, deposit FROM toolingPurchaseOrder" + " WHERE poNumber = " + poNumber);
 			connect.rs = connect.st.executeQuery(sql);
 			while(connect.rs.next()){
 				toolingPurchaseOrderStatement[0] = connect.rs.getString("orderDate");
@@ -1134,8 +1135,8 @@ public class IRBS {
 				toolingPurchaseOrderStatement[2] = connect.rs.getString("remark");
 				toolingPurchaseOrderStatement[3] = connect.rs.getString("completion");
 				toolingPurchaseOrderStatement[4] = connect.rs.getString("customerName");
+				toolingPurchaseOrderStatement[5] = connect.rs.getString("deposit");
 			}
-			System.out.println("orderDate: " + toolingPurchaseOrderStatement[0] + " vendor: " + toolingPurchaseOrderStatement[1] + " remark: " + toolingPurchaseOrderStatement[2] + " completion: " + toolingPurchaseOrderStatement[3] + " customerName: " + toolingPurchaseOrderStatement[4]);
 		}catch(Exception ex){
 			System.out.println("Error: "+ex);
 		}
@@ -1164,7 +1165,7 @@ public class IRBS {
 			String sql = ("SELECT * FROM toolingOrderItem	WHERE poNumber = " + poNumber); 
 			connect.rs = connect.st.executeQuery(sql);
 			while(connect.rs.next()){
-				DataToolingOrderItem temp = new DataToolingOrderItem(connect.rs.getString("PRODUCT"), connect.rs.getString("quantity"), connect.rs.getString("price"), connect.rs.getString("fixedcost"));
+				DataToolingOrderItem temp = new DataToolingOrderItem(connect.rs.getString("PRODUCT"), connect.rs.getString("quantity"), connect.rs.getString("price"), connect.rs.getString("description"));
 				toolingOrderItemStatement.add(temp);
 			}			
 		}catch(Exception ex){
