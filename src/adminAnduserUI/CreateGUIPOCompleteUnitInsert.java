@@ -104,6 +104,7 @@ public class CreateGUIPOCompleteUnitInsert {
 	private JButton poInsertCompleteUnitIncreaseShipmentButton;
 	private JButton poInsertCompleteUnitDeleteShipmentButton;
 	
+	private JButton[] poInsertCompleteUnitShowSAButton = new JButton[100];
 	private JButton[] poInsertCompleteUnitIncreaseSAButton = new JButton[100];
 	private JButton[] poInsertCompleteUnitDeleteSAButton = new JButton[100];
 	
@@ -728,6 +729,19 @@ public class CreateGUIPOCompleteUnitInsert {
 					gbc.gridx = 0;
 					gbc.gridy = gbccntCompleteUnitProduct[finalcntCompleteUnitProduct] + 2;
 					poInsertCompleteUnitPanel.add(poInsertCompleteUnitSANoLabel[finalcntCompleteUnitProduct], gbc);
+					
+					poInsertCompleteUnitShowSAButton[finalcntCompleteUnitProduct] = new JButton("Hide SA");
+					gbc.gridwidth = 1;
+					gbc.gridx = 1;
+					gbc.gridy = gbccntCompleteUnitProduct[finalcntCompleteUnitProduct] + 2;
+					poInsertCompleteUnitShowSAButton[finalcntCompleteUnitProduct].addActionListener(new ActionListener(){
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							showSA(finalcntCompleteUnitProduct);
+						}
+					});
+					poInsertCompleteUnitPanel.add(poInsertCompleteUnitShowSAButton[finalcntCompleteUnitProduct], gbc);
 
 					poInsertCompleteUnitSAUnitLabel[finalcntCompleteUnitProduct] = new JLabel("Unit Shipped");
 					gbc.gridwidth = 1;
@@ -895,7 +909,8 @@ public class CreateGUIPOCompleteUnitInsert {
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoTextField[cntCompleteUnitProduct][i]);
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainTextField[cntCompleteUnitProduct][i]);
 					}
-
+					
+					poInsertCompleteUnitPanel.remove(poInsertCompleteUnitShowSAButton[cntCompleteUnitProduct]);
 					poInsertCompleteUnitPanel.remove(poInsertCompleteUnitIncreaseSAButton[cntCompleteUnitProduct]);
 					poInsertCompleteUnitPanel.remove(poInsertCompleteUnitDeleteSAButton[cntCompleteUnitProduct]);
 
@@ -1108,6 +1123,19 @@ public class CreateGUIPOCompleteUnitInsert {
 		gbc.gridx = 0;
 		gbc.gridy = 203;
 		poInsertCompleteUnitPanel.add(poInsertCompleteUnitSANoLabel[0], gbc);
+		
+		poInsertCompleteUnitShowSAButton[0] = new JButton("Hide SA");
+		gbc.gridwidth = 1;
+		gbc.gridx = 1;
+		gbc.gridy = 203;
+		poInsertCompleteUnitShowSAButton[0].addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showSA(0);
+			}
+		});
+		poInsertCompleteUnitPanel.add(poInsertCompleteUnitShowSAButton[0], gbc);
 
 		poInsertCompleteUnitSAUnitLabel[0] = new JLabel("Unit Shipped");
 		gbc.gridwidth = 1;
@@ -1655,6 +1683,42 @@ public class CreateGUIPOCompleteUnitInsert {
 			}
 		}
 		return shipmentPRICE;
+	}
+	
+	private void showSA(int cntlocation) {
+		try {
+			if(poInsertCompleteUnitShowSAButton[cntlocation].getText().equals("Show SA")) {
+				poInsertCompleteUnitShowSAButton[cntlocation].setText("Hide SA");
+				poInsertCompleteUnitSAUnitLabel[cntlocation].setVisible(true);
+				poInsertCompleteUnitSAInvoiceNoLabel[cntlocation].setVisible(true);
+				poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(true);
+				poInsertCompleteUnitIncreaseSAButton[cntlocation].setVisible(true);
+				poInsertCompleteUnitDeleteSAButton[cntlocation].setVisible(true);
+				for(int j = 0; j < 1000; j++){
+					final int finalj = j;
+					poInsertCompleteUnitSANoTextField[cntlocation][finalj].setVisible(true);
+					poInsertCompleteUnitSAUnitTextField[cntlocation][finalj].setVisible(true);
+					poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][finalj].setVisible(true);
+					poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(true);
+				}
+			}else {
+				poInsertCompleteUnitShowSAButton[cntlocation].setText("Show SA");
+				poInsertCompleteUnitSAUnitLabel[cntlocation].setVisible(false);
+				poInsertCompleteUnitSAInvoiceNoLabel[cntlocation].setVisible(false);
+				poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(false);
+				poInsertCompleteUnitIncreaseSAButton[cntlocation].setVisible(false);
+				poInsertCompleteUnitDeleteSAButton[cntlocation].setVisible(false);
+				for(int j = 0; j < 1000; j++){
+					final int finalj = j;
+					poInsertCompleteUnitSANoTextField[cntlocation][finalj].setVisible(false);
+					poInsertCompleteUnitSAUnitTextField[cntlocation][finalj].setVisible(false);
+					poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][finalj].setVisible(false);
+					poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(false);
+				}
+			}
+		}catch(Exception ex) {
+			
+		}
 	}
 }
 

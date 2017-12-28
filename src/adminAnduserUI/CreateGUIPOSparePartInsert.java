@@ -96,6 +96,7 @@ public class CreateGUIPOSparePartInsert {
 	private JButton poInsertSparePartDeleteOrderDateButton;
 	private JButton poInsertSparePartIncreaseProductButton;
 	private JButton poInsertSparePartDeleteProductButton;
+	private JButton[] poInsertSparePartShowSAButton = new JButton[100];
 	private JButton[] poInsertSparePartIncreaseSAButton = new JButton[100];
 	private JButton[] poInsertSparePartDeleteSAButton = new JButton[100];
 	private JButton poInsertSparePartProductButton;
@@ -638,6 +639,19 @@ public class CreateGUIPOSparePartInsert {
 					gbc.gridy = gbccntSparePartProduct[finalcntSparePartProduct] + 2;
 					poInsertSparePartPanel.add(poInsertSparePartSANoLabel[finalcntSparePartProduct], gbc);
 					
+					poInsertSparePartShowSAButton[finalcntSparePartProduct] = new JButton("Hide SA");
+					gbc.gridwidth = 1;
+					gbc.gridx = 1;
+					gbc.gridy = gbccntSparePartProduct[finalcntSparePartProduct] + 2;
+					poInsertSparePartShowSAButton[finalcntSparePartProduct].addActionListener(new ActionListener(){
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							showSA(finalcntSparePartProduct);
+						}
+					});
+					poInsertSparePartPanel.add(poInsertSparePartShowSAButton[finalcntSparePartProduct], gbc);
+					
 					poInsertSparePartSAUnitLabel[finalcntSparePartProduct] = new JLabel("Unit Shipped");
 					gbc.gridwidth = 1;
 					gbc.gridx = 2;
@@ -847,6 +861,7 @@ public class CreateGUIPOSparePartInsert {
 						poInsertSparePartPanel.remove(poInsertSparePartSAETDTextField[cntSparePartProduct][i]);
 					}
 					
+					poInsertSparePartPanel.remove(poInsertSparePartShowSAButton[cntSparePartProduct]);
 					poInsertSparePartPanel.remove(poInsertSparePartIncreaseSAButton[cntSparePartProduct]);
 					poInsertSparePartPanel.remove(poInsertSparePartDeleteSAButton[cntSparePartProduct]);
 
@@ -1122,6 +1137,19 @@ public class CreateGUIPOSparePartInsert {
 		gbc.gridx = 0;
 		gbc.gridy = 203;
 		poInsertSparePartPanel.add(poInsertSparePartSANoLabel[0], gbc);
+		
+		poInsertSparePartShowSAButton[0] = new JButton("Hide SA");
+		gbc.gridwidth = 1;
+		gbc.gridx = 1;
+		gbc.gridy = 203;
+		poInsertSparePartShowSAButton[0].addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showSA(0);
+			}
+		});
+		poInsertSparePartPanel.add(poInsertSparePartShowSAButton[0], gbc);
 		
 		poInsertSparePartSAUnitLabel[0] = new JLabel("Unit Shipped");
 		gbc.gridwidth = 1;
@@ -1703,6 +1731,46 @@ public class CreateGUIPOSparePartInsert {
 		DecimalFormat nf = new DecimalFormat("###,###,###,###,##0.00");
 
 		poInsertSparePartTotalPriceTextField.setText(nf.format(tp));
+	}
+	
+	private void showSA(int cntlocation) {
+		try {
+			if(poInsertSparePartShowSAButton[cntlocation].getText().equals("Show SA")) {
+				poInsertSparePartShowSAButton[cntlocation].setText("Hide SA");
+				poInsertSparePartSAUnitLabel[cntlocation].setVisible(true);
+				poInsertSparePartSAInvoiceNoLabel[cntlocation].setVisible(true);
+				poInsertSparePartSARemainLabel[cntlocation].setVisible(true);
+				poInsertSparePartSAETDLabel[cntlocation].setVisible(true);
+				poInsertSparePartIncreaseSAButton[cntlocation].setVisible(true);
+				poInsertSparePartDeleteSAButton[cntlocation].setVisible(true);
+				for(int j = 0; j < 1000; j++){
+					final int finalj = j;
+					poInsertSparePartSANoTextField[cntlocation][finalj].setVisible(true);
+					poInsertSparePartSAUnitTextField[cntlocation][finalj].setVisible(true);
+					poInsertSparePartSAInvoiceNoTextField[cntlocation][finalj].setVisible(true);
+					poInsertSparePartSARemainTextField[cntlocation][finalj].setVisible(true);
+					poInsertSparePartSAETDTextField[cntlocation][finalj].setVisible(true);
+				}
+			}else {
+				poInsertSparePartShowSAButton[cntlocation].setText("Show SA");
+				poInsertSparePartSAUnitLabel[cntlocation].setVisible(false);
+				poInsertSparePartSAInvoiceNoLabel[cntlocation].setVisible(false);
+				poInsertSparePartSARemainLabel[cntlocation].setVisible(false);
+				poInsertSparePartSAETDLabel[cntlocation].setVisible(false);
+				poInsertSparePartIncreaseSAButton[cntlocation].setVisible(false);
+				poInsertSparePartDeleteSAButton[cntlocation].setVisible(false);
+				for(int j = 0; j < 1000; j++){
+					final int finalj = j;
+					poInsertSparePartSANoTextField[cntlocation][finalj].setVisible(false);
+					poInsertSparePartSAUnitTextField[cntlocation][finalj].setVisible(false);
+					poInsertSparePartSAInvoiceNoTextField[cntlocation][finalj].setVisible(false);
+					poInsertSparePartSARemainTextField[cntlocation][finalj].setVisible(false);
+					poInsertSparePartSAETDTextField[cntlocation][finalj].setVisible(false);
+				}
+			}
+		}catch(Exception ex) {
+			
+		}
 	}
 }
 
