@@ -468,7 +468,8 @@ public class CreateGUIPOToolingInsert {
 						public void keyReleased(KeyEvent e) {
 							
 							setPrice();
-							changePriceFormat(poInsertToolingProductPriceTextField[cntToolingProduct]);
+							if(e.getKeyChar() != '.')
+								changePriceFormat(poInsertToolingProductPriceTextField[cntToolingProduct]);
 							
 							poInsertToolingPanel.revalidate();  
 							poInsertToolingPanel.repaint();
@@ -604,7 +605,8 @@ public class CreateGUIPOToolingInsert {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				setPrice();
-				changePriceFormat(poInsertToolingProductPriceTextField[0]);
+				if(e.getKeyChar() != '.')
+					changePriceFormat(poInsertToolingProductPriceTextField[0]);
 
 				poInsertToolingPanel.revalidate();  
 				poInsertToolingPanel.repaint();
@@ -935,8 +937,8 @@ public class CreateGUIPOToolingInsert {
 	}
 	
 	private void changePriceFormat(JTextField textField) {
-		DecimalFormat nf = new DecimalFormat("###,###,###,###,###");
-		textField.setText(nf.format(Integer.parseInt(textField.getText().replace(",", ""))));
+		DecimalFormat nf = new DecimalFormat("###,###,###,###,###.##");
+		textField.setText(nf.format(Double.parseDouble(textField.getText().replace(",", ""))));
 	}
 }
 
