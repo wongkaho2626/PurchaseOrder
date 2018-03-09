@@ -471,7 +471,7 @@ public class CreateGUIViewerPOView {
 	// ========================= (criteria: purchase order, order date, order item# and ETD)
 	private String searchAllPOCompleteUnitSQL(){
 		int cnt = 1;
-		String sql = ("SELECT DISTINCT completeunitPurchaseOrder.poNumber, `option`.description, completeunitPurchaseOrder.vendor, DATE_FORMAT(completeunitPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM completeunitPurchaseOrder, completeunitOrderItem, completeunitShipment, `option` WHERE completeunitPurchaseOrder.poNumber = completeunitOrderItem.poNumber AND `option`.id = completeunitPurchaseOrder.customerName ");
+		String sql = ("SELECT DISTINCT completeunitPurchaseOrder.poNumber, completeunitOrderItem.PRODUCT, maintenance.ACRONYM, `option`.description, completeunitPurchaseOrder.vendor, DATE_FORMAT(completeunitPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM completeunitPurchaseOrder, completeunitOrderItem, completeunitShipment, `option`, maintenance WHERE completeunitPurchaseOrder.poNumber = completeunitOrderItem.poNumber AND `option`.id = completeunitPurchaseOrder.customerName AND maintenance.PRODUCT = completeunitOrderItem.PRODUCT ");
 		String addsql;
 		if(!poViewNoTextField.getText().equals("")){
 			if(cnt != 0){

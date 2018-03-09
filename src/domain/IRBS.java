@@ -415,6 +415,8 @@ public class IRBS {
 		map.put("poNumber", "P.O.");
 		map.put("vendor", "VENDOR");
 		map.put("orderDate", "ORDER DATE");
+		map.put("PRODUCT", "PART NO");
+		map.put("ACRONYM", "ACRONYM");
 		try{
 			connect.rs = connect.st.executeQuery(sql1);
 			ResultSetMetaData metaData = (ResultSetMetaData) connect.rs.getMetaData();
