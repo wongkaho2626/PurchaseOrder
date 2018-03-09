@@ -534,7 +534,7 @@ public class CreateGUIPOView {
 	// ========================= (criteria: purchase order, order date, order item# and ETD)
 	private String searchAllPOSparePartSQL(){
 		int cnt = 1;
-		String sql = ("SELECT DISTINCT sparepartPurchaseOrder.poNumber, `option`.description, sparepartPurchaseOrder.vendor, DATE_FORMAT(sparepartPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM sparepartPurchaseOrder, sparepartOrderItem, `option` WHERE sparepartPurchaseOrder.poNumber = sparepartOrderItem.poNumber AND `option`.id = sparepartPurchaseOrder.customerName ");
+		String sql = ("SELECT DISTINCT sparepartPurchaseOrder.poNumber, sparepartOrderItem.PRODUCT, maintenance.ACRONYM, `option`.description, sparepartPurchaseOrder.vendor, DATE_FORMAT(sparepartPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM sparepartPurchaseOrder, sparepartOrderItem, `option`, maintenance WHERE sparepartPurchaseOrder.poNumber = sparepartOrderItem.poNumber AND `option`.id = sparepartPurchaseOrder.customerName  AND maintenance.PRODUCT = sparepartOrderItem.PRODUCT ");
 		String addsql;
 		if(!poViewNoTextField.getText().equals("")){
 			if(cnt != 0){
