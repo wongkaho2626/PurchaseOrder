@@ -575,7 +575,7 @@ public class CreateGUIViewerPOView {
 	// ========================= (criteria: purchase order, order date, order item#)
 	private String searchAllPOToolingSQL(){
 		int cnt = 1;
-		String sql = ("SELECT DISTINCT toolingPurchaseOrder.poNumber, `option`.description, toolingPurchaseOrder.vendor, DATE_FORMAT(toolingPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM toolingPurchaseOrder, toolingOrderItem, `option` WHERE toolingPurchaseOrder.poNumber = toolingOrderItem.poNumber AND `option`.id = toolingPurchaseOrder.customerName ");
+		String sql = ("SELECT DISTINCT toolingPurchaseOrder.poNumber, toolingOrderItem.PRODUCT, `option`.description, toolingPurchaseOrder.vendor, DATE_FORMAT(toolingPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM toolingPurchaseOrder, toolingOrderItem, `option` WHERE toolingPurchaseOrder.poNumber = toolingOrderItem.poNumber AND `option`.id = toolingPurchaseOrder.customerName ");
 		String addsql;
 		if(!poViewNoTextField.getText().equals("")){
 			if(cnt != 0){
@@ -623,7 +623,7 @@ public class CreateGUIViewerPOView {
 	// ========================= (criteria: purchase order, order date, order item#)
 	private String searchAllPOMiscSQL(){
 		int cnt = 1;
-		String sql = ("SELECT DISTINCT miscPurchaseOrder.poNumber, `option`.description, miscPurchaseOrder.vendor, DATE_FORMAT(miscPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM miscPurchaseOrder, miscOrderItem, `option` WHERE miscPurchaseOrder.poNumber = miscOrderItem.poNumber AND `option`.id = miscPurchaseOrder.customerName ");
+		String sql = ("SELECT DISTINCT miscPurchaseOrder.poNumber, miscOrderItem.PRODUCT, `option`.description, miscPurchaseOrder.vendor, DATE_FORMAT(miscPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM miscPurchaseOrder, miscOrderItem, `option` WHERE miscPurchaseOrder.poNumber = miscOrderItem.poNumber AND `option`.id = miscPurchaseOrder.customerName ");
 		String addsql;
 		if(!poViewNoTextField.getText().equals("")){
 			if(cnt != 0){
