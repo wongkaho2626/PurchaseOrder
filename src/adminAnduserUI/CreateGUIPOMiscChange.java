@@ -533,6 +533,8 @@ public class CreateGUIPOMiscChange {
 						public void keyReleased(KeyEvent e) {
 							
 							setPrice();
+							if(e.getKeyChar() != '.')
+								changePriceFormat(poInsertMiscProductPriceTextField[cntMiscProduct]);
 							
 							poInsertMiscPanel.revalidate();  
 							poInsertMiscPanel.repaint();
@@ -649,7 +651,7 @@ public class CreateGUIPOMiscChange {
 
 					setQuantity();
 
-					for(int i = 0; i < miscOrderDateStatement.size(); i++){
+					for(int i = 0; i <= cntMiscProduct; i++){
 						NumberFormat nf = new DecimalFormat("###,###,###,###,###");
 						if(!StringUtils.isEmptyOrWhitespaceOnly(poInsertMiscProductQuantityTextField[i].getText())){
 							poInsertMiscProductQuantityTextField[i].setText(nf.format(Integer.parseInt(poInsertMiscProductQuantityTextField[i].getText().replace(",", ""))));
@@ -668,7 +670,8 @@ public class CreateGUIPOMiscChange {
 			gbc.gridy = 55 + i;
 			poInsertMiscPanel.add(poInsertMiscDescriptionTextField[i], gbc);
 
-			poInsertMiscProductPriceTextField[i] = new JTextField(miscOrderItemStatement.get(i).getPrice());
+			DecimalFormat df = new DecimalFormat("###,###,###,###,###.00");
+			poInsertMiscProductPriceTextField[i] = new JTextField(df.format(Double.parseDouble(miscOrderItemStatement.get(i).getPrice())));
 			gbc.gridwidth = 1;
 			gbc.gridx = 7;
 			gbc.gridy = 55 + i;
@@ -682,7 +685,11 @@ public class CreateGUIPOMiscChange {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					setPrice();
-
+					for(int i = 0; i < miscOrderItemStatement.size(); i++){
+						if(e.getKeyChar() != '.')
+							changePriceFormat(poInsertMiscProductPriceTextField[i]);
+					}
+					
 					poInsertMiscPanel.revalidate();  
 					poInsertMiscPanel.repaint();
 				}
@@ -738,7 +745,7 @@ public class CreateGUIPOMiscChange {
 								}
 							}
 							for(int i = 0; i <= cntMiscProduct; i++){
-								irbs.insertMiscOrderItem(Integer.parseInt(poInsertMiscNoTextField.getText()), poInsertMiscProductNoTextField[i].getText(), Integer.parseInt(poInsertMiscProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertMiscProductPriceTextField[i].getText()), poInsertMiscDescriptionTextField[i].getText());
+								irbs.insertMiscOrderItem(Integer.parseInt(poInsertMiscNoTextField.getText()), poInsertMiscProductNoTextField[i].getText(), Integer.parseInt(poInsertMiscProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertMiscProductPriceTextField[i].getText().replace(",", "")), poInsertMiscDescriptionTextField[i].getText());
 							}
 							d.dispose();
 							repaintToShowAll();
@@ -1045,6 +1052,11 @@ public class CreateGUIPOMiscChange {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void changePriceFormat(JTextField textField) {
+		DecimalFormat nf = new DecimalFormat("###,###,###,###,###.##");
+		textField.setText(nf.format(Double.parseDouble(textField.getText().replace(",", ""))));
 	}
 }
 

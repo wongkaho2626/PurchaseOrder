@@ -694,8 +694,8 @@ public class CreateGUIPOToolingChange {
 			gbc.gridy = 55 + i;
 			poInsertToolingPanel.add(poInsertToolingDescriptionTextField[i], gbc);
 
-			poInsertToolingProductPriceTextField[i] = new JTextField(toolingOrderItemStatement.get(i).getPrice());
-			changePriceFormat(poInsertToolingProductPriceTextField[i]);
+			DecimalFormat df = new DecimalFormat("###,###,###,###,###.00");
+			poInsertToolingProductPriceTextField[i] = new JTextField(df.format(Double.parseDouble(toolingOrderItemStatement.get(i).getPrice())));
 			gbc.gridwidth = 1;
 			gbc.gridx = 8;
 			gbc.gridy = 55 + i;

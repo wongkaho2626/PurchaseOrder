@@ -433,7 +433,8 @@ public class CreateGUIViewerPOViewTooling {
 			gbc.gridy = 55 + i;
 			poInsertToolingPanel.add(poInsertToolingDescriptionTextField[i], gbc);
 
-			poInsertToolingProductPriceTextField[i] = new JTextField(toolingOrderItemStatement.get(i).getPrice());
+			DecimalFormat df = new DecimalFormat("###,###,###,###,###.00");
+			poInsertToolingProductPriceTextField[i] = new JTextField(df.format(Double.parseDouble(toolingOrderItemStatement.get(i).getPrice())));
 			poInsertToolingProductPriceTextField[i].setEditable(false);
 			gbc.gridwidth = 1;
 			gbc.gridx = 7;

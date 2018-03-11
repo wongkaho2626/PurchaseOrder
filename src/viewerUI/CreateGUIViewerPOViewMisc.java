@@ -395,7 +395,8 @@ public class CreateGUIViewerPOViewMisc {
 			gbc.gridy = 55 + i;
 			poInsertMiscPanel.add(poInsertMiscDescriptionTextField[i], gbc);
 
-			poInsertMiscProductPriceTextField[i] = new JTextField(miscOrderItemStatement.get(i).getPrice());
+			DecimalFormat df = new DecimalFormat("###,###,###,###,###.00");
+			poInsertMiscProductPriceTextField[i] = new JTextField(df.format(Double.parseDouble(miscOrderItemStatement.get(i).getPrice())));
 			poInsertMiscProductPriceTextField[i].setEditable(false);
 			gbc.gridwidth = 1;
 			gbc.gridx = 6;
