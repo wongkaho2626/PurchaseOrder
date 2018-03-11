@@ -25,11 +25,19 @@ public class Restoredbtosql {
 	private static String user = "root";
 	private static String pass = "root";
 	private static String path = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql";
+	
+	//for development
+//	private static String path = "/Applications/MAMP/Library/bin/mysql";
 
 	public static boolean restore() throws SQLException{
 		IPandPort IPandPort = new IPandPort();
 		ip = IPandPort.getIP();
 		port = IPandPort.getPort();
+		
+		//for development
+//		ip = "localhost";
+//		port = "3306";
+		
 		try{
 			//STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
