@@ -56,6 +56,7 @@ public class CreateGUIViewerPOView {
 	private JTextField poViewProductNoTextField;
 	private JTextField poViewShipmentStartETDTextField;
 	private JTextField poViewShipmentEndETDTextField;
+	private JTextField poViewACRONYMTextField;
 	private JComboBox selectPOComboBox;
 	private JComboBox selectCustomerNameComboBox;
 	private String[] selectPO = {"Complete Unit", "Spare Part", "Tooling", "Misc"};
@@ -183,17 +184,29 @@ public class CreateGUIViewerPOView {
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		poViewPanel.add(poViewVendorTextField, gbc);
+		
+		poViewLabel = new JLabel("ACRONYM: ");
+		gbc.gridwidth = 1;
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		poViewPanel.add(poViewLabel, gbc);
+		
+		poViewACRONYMTextField = new JTextField();
+		gbc.gridwidth = 4;
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		poViewPanel.add(poViewACRONYMTextField, gbc);
 
 		poViewLabel = new JLabel("Part No: ");
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		poViewPanel.add(poViewLabel, gbc);
 
 		poViewProductNoTextField = new JTextField();
 		gbc.gridwidth = 4;
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		poViewProductNoTextField.addKeyListener(new KeyListener(){
 			@Override
 			public void keyTyped(KeyEvent e) {}
@@ -217,19 +230,19 @@ public class CreateGUIViewerPOView {
 		poViewLabel = new JLabel("Shipment ETD (MM/DD/YY):            ");
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		poViewPanel.add(poViewLabel, gbc);
 
 		poViewLabel = new JLabel("From: ");
 		gbc.gridwidth = 1;
 		gbc.gridx = 1;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		poViewPanel.add(poViewLabel, gbc);
 
 		poViewShipmentStartETDTextField = new JTextField();
 		gbc.gridwidth = 3;
 		gbc.gridx = 2;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		poViewShipmentStartETDTextField.addKeyListener(new KeyListener(){
 			@Override
 			public void keyTyped(KeyEvent e) {}
@@ -256,13 +269,13 @@ public class CreateGUIViewerPOView {
 		poViewLabel = new JLabel("To:");
 		gbc.gridwidth = 1;
 		gbc.gridx = 1;
-		gbc.gridy = 7;
+		gbc.gridy = 8;
 		poViewPanel.add(poViewLabel, gbc);
 
 		poViewShipmentEndETDTextField = new JTextField();
 		gbc.gridwidth = 3;
 		gbc.gridx = 2;
-		gbc.gridy = 7;
+		gbc.gridy = 8;
 		poViewShipmentEndETDTextField.addKeyListener(new KeyListener(){
 			@Override
 			public void keyTyped(KeyEvent e) {}
@@ -290,7 +303,7 @@ public class CreateGUIViewerPOView {
 		poViewLabel = new JLabel("Purchase Order Type: ");
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 8;
+		gbc.gridy = 9;
 		poViewPanel.add(poViewLabel, gbc);
 		
 		selectPOComboBox = new JComboBox(selectPO);
@@ -298,13 +311,13 @@ public class CreateGUIViewerPOView {
 		selectPOComboBox.setSelectedItem("Complete Unit");
 		gbc.gridwidth = 4;
 		gbc.gridx = 1;
-		gbc.gridy = 8;
+		gbc.gridy = 9;
 		poViewPanel.add(selectPOComboBox, gbc);
 		
 		poViewLabel = new JLabel("Customer Name: ");
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 9;
+		gbc.gridy = 10;
 		poViewPanel.add(poViewLabel, gbc);
 		
 		IRBS irbs = new IRBS();
@@ -321,7 +334,7 @@ public class CreateGUIViewerPOView {
 		}
 		gbc.gridwidth = 4;
 		gbc.gridx = 1;
-		gbc.gridy = 9;
+		gbc.gridy = 10;
 		poViewPanel.add(selectCustomerNameComboBox, gbc);
 
 		poViewSearchButton = new JButton("Search");
@@ -513,6 +526,10 @@ public class CreateGUIViewerPOView {
 					+ " AND completeunitShipment.ETD <= \'" + checkPOViewDateValid(poViewShipmentEndETDTextField.getText()) + "\'";
 			sql = sql + addsql;
 		}
+		if(!poViewACRONYMTextField.getText().equals("")) {
+			addsql = " AND maintenance.ACRONYM = \"" + poViewACRONYMTextField.getText() + "\"";
+			sql = sql + addsql;
+		}
 		if(!StringUtils.isEmptyOrWhitespaceOnly(selectCustomerNameComboBox.getSelectedItem().toString())){
 			addsql = " AND completeunitPurchaseOrder.customerName = \"" + CustomerNameItem.getCustomerNameId(selectCustomerNameComboBox.getSelectedItem().toString()) + "\"";
 			sql = sql + addsql;
@@ -559,6 +576,10 @@ public class CreateGUIViewerPOView {
 			addsql = " AND sparepartPurchaseOrder.orderDate <= \'" + checkPOViewDateValid(poViewEndOrderDateTextField.getText()) + "\'";
 			sql = sql + addsql;
 		}
+		if(!poViewACRONYMTextField.getText().equals("")) {
+			addsql = " AND maintenance.ACRONYM = \"" + poViewACRONYMTextField.getText() + "\"";
+			sql = sql + addsql;
+		}
 		if(!StringUtils.isEmptyOrWhitespaceOnly(selectCustomerNameComboBox.getSelectedItem().toString())){
 			addsql = " AND sparepartPurchaseOrder.customerName = \"" + CustomerNameItem.getCustomerNameId(selectCustomerNameComboBox.getSelectedItem().toString()) + "\"";
 			sql = sql + addsql;
@@ -575,7 +596,7 @@ public class CreateGUIViewerPOView {
 	// ========================= (criteria: purchase order, order date, order item#)
 	private String searchAllPOToolingSQL(){
 		int cnt = 1;
-		String sql = ("SELECT DISTINCT toolingPurchaseOrder.poNumber, toolingOrderItem.PRODUCT, `option`.description, toolingPurchaseOrder.vendor, DATE_FORMAT(toolingPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM toolingPurchaseOrder, toolingOrderItem, `option` WHERE toolingPurchaseOrder.poNumber = toolingOrderItem.poNumber AND `option`.id = toolingPurchaseOrder.customerName ");
+		String sql = ("SELECT DISTINCT toolingPurchaseOrder.poNumber, toolingOrderItem.PRODUCT, maintenance.ACRONYM, `option`.description, toolingPurchaseOrder.vendor, DATE_FORMAT(toolingPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM toolingPurchaseOrder, toolingOrderItem, `option`, (SELECT toolingOrderItem.PRODUCT, maintenance.ACRONYM FROM toolingOrderItem LEFT JOIN maintenance ON maintenance.PRODUCT = toolingOrderItem.PRODUCT) AS maintenance WHERE toolingPurchaseOrder.poNumber = toolingOrderItem.poNumber AND `option`.id = toolingPurchaseOrder.customerName AND maintenance.PRODUCT = toolingOrderItem.PRODUCT ");
 		String addsql;
 		if(!poViewNoTextField.getText().equals("")){
 			if(cnt != 0){
@@ -607,6 +628,10 @@ public class CreateGUIViewerPOView {
 			addsql = " AND toolingPurchaseOrder.orderDate <= \'" + checkPOViewDateValid(poViewEndOrderDateTextField.getText()) + "\'";
 			sql = sql + addsql;
 		}
+		if(!poViewACRONYMTextField.getText().equals("")) {
+			addsql = " AND maintenance.ACRONYM = \"" + poViewACRONYMTextField.getText() + "\"";
+			sql = sql + addsql;
+		}
 		if(!StringUtils.isEmptyOrWhitespaceOnly(selectCustomerNameComboBox.getSelectedItem().toString())){
 			addsql = " AND toolingPurchaseOrder.customerName = \"" + CustomerNameItem.getCustomerNameId(selectCustomerNameComboBox.getSelectedItem().toString()) + "\"";
 			sql = sql + addsql;
@@ -623,7 +648,7 @@ public class CreateGUIViewerPOView {
 	// ========================= (criteria: purchase order, order date, order item#)
 	private String searchAllPOMiscSQL(){
 		int cnt = 1;
-		String sql = ("SELECT DISTINCT miscPurchaseOrder.poNumber, miscOrderItem.PRODUCT, `option`.description, miscPurchaseOrder.vendor, DATE_FORMAT(miscPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM miscPurchaseOrder, miscOrderItem, `option` WHERE miscPurchaseOrder.poNumber = miscOrderItem.poNumber AND `option`.id = miscPurchaseOrder.customerName ");
+		String sql = ("SELECT DISTINCT miscPurchaseOrder.poNumber, miscOrderItem.PRODUCT, `option`.description, miscPurchaseOrder.vendor, DATE_FORMAT(miscPurchaseOrder.orderDate, '%m/%d/%y') AS orderDate FROM miscPurchaseOrder, miscOrderItem, `option`, (SELECT miscOrderItem.PRODUCT, maintenance.ACRONYM FROM miscOrderItem LEFT JOIN maintenance ON maintenance.PRODUCT = miscOrderItem.PRODUCT) AS maintenance WHERE miscPurchaseOrder.poNumber = miscOrderItem.poNumber AND `option`.id = miscPurchaseOrder.customerName AND maintenance.PRODUCT = miscOrderItem.PRODUCT");
 		String addsql;
 		if(!poViewNoTextField.getText().equals("")){
 			if(cnt != 0){
@@ -655,6 +680,10 @@ public class CreateGUIViewerPOView {
 			addsql = " AND miscPurchaseOrder.orderDate <= \'" + checkPOViewDateValid(poViewEndOrderDateTextField.getText()) + "\'";
 			sql = sql + addsql;
 		}
+		if(!poViewACRONYMTextField.getText().equals("")) {
+			addsql = " AND maintenance.ACRONYM = \"" + poViewACRONYMTextField.getText() + "\"";
+			sql = sql + addsql;
+		}
 		if(!StringUtils.isEmptyOrWhitespaceOnly(selectCustomerNameComboBox.getSelectedItem().toString())){
 			addsql = " AND miscPurchaseOrder.customerName = \"" + CustomerNameItem.getCustomerNameId(selectCustomerNameComboBox.getSelectedItem().toString()) + "\"";
 			sql = sql + addsql;
@@ -677,6 +706,7 @@ public class CreateGUIViewerPOView {
 		poViewEndOrderDateTextField.setText(null);
 		poViewShipmentStartETDTextField.setText(null);
 		poViewShipmentEndETDTextField.setText(null);
+		poViewACRONYMTextField.setText(null);
 		selectPOComboBox.setSelectedItem("Complete Unit");
 		
 	}
