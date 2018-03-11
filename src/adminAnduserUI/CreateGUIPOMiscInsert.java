@@ -371,7 +371,7 @@ public class CreateGUIPOMiscInsert {
 								IRBS irbs = new IRBS();
 								String [] maintenanceStatement = irbs.maintenanceStatement(poInsertMiscProductNoTextField[i].getText());
 								if(!poInsertMiscProductNoTextField[i].getText().equals("")){
-									poInsertMiscDescriptionTextField[i].setText(maintenanceStatement[1]);	
+//									poInsertMiscDescriptionTextField[i].setText(maintenanceStatement[1]);	
 									poInsertMiscDutyCodeTextField[i].setText(maintenanceStatement[2]);	
 								}
 								if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
@@ -421,7 +421,6 @@ public class CreateGUIPOMiscInsert {
 					poInsertMiscPanel.add(poInsertMiscProductQuantityTextField[cntMiscProduct], gbc);
 					
 					poInsertMiscDescriptionTextField[cntMiscProduct] = new JTextField();
-					poInsertMiscDescriptionTextField[cntMiscProduct].setEditable(false);
 					gbc.gridwidth = 4;
 					gbc.gridx = 3;
 					gbc.gridy = gbccntMiscProduct;
@@ -527,7 +526,7 @@ public class CreateGUIPOMiscInsert {
 				String [] maintenanceStatement = irbs.maintenanceStatement(poInsertMiscProductNoTextField[0].getText());
 				if(!poInsertMiscProductNoTextField[0].getText().equals("")){
 					poInsertMiscACRONYMTextField[0].setText(maintenanceStatement[0]);	
-					poInsertMiscDescriptionTextField[0].setText(maintenanceStatement[1]);	
+//					poInsertMiscDescriptionTextField[0].setText(maintenanceStatement[1]);	
 					poInsertMiscDutyCodeTextField[0].setText(maintenanceStatement[2]);	
 				}
 				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
@@ -575,7 +574,6 @@ public class CreateGUIPOMiscInsert {
 		poInsertMiscPanel.add(poInsertMiscProductQuantityTextField[0], gbc);
 		
 		poInsertMiscDescriptionTextField[0] = new JTextField();
-		poInsertMiscDescriptionTextField[0].setEditable(false);
 		gbc.gridwidth = 4;
 		gbc.gridx = 3;
 		gbc.gridy = 55;
@@ -656,7 +654,7 @@ public class CreateGUIPOMiscInsert {
 									}
 								}
 								for(int i = 0; i <= cntMiscProduct; i++){
-									irbs.insertMiscOrderItem(Integer.parseInt(poInsertMiscNoTextField.getText()), poInsertMiscProductNoTextField[i].getText(), Integer.parseInt(poInsertMiscProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertMiscProductPriceTextField[i].getText()), poInsertMiscProductFixedCostTextField[i].getText());
+									irbs.insertMiscOrderItem(Integer.parseInt(poInsertMiscNoTextField.getText()), poInsertMiscProductNoTextField[i].getText(), Integer.parseInt(poInsertMiscProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertMiscProductPriceTextField[i].getText()), poInsertMiscDescriptionTextField[i].getText());
 								}
 								poInsertReset();
 								JOptionPane
@@ -751,8 +749,8 @@ public class CreateGUIPOMiscInsert {
 				check = false;
 			if(poInsertMiscProductPriceTextField[i].getText().equals(""))
 				check = false;
-//			if(poInsertMiscProductFixedCostTextField[i].getText().equals(""))
-//				check = false;
+			if(poInsertMiscDescriptionTextField[i].getText().equals(""))
+				check = false;
 		}
 		return check;
 	}

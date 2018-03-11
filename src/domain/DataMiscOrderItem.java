@@ -4,13 +4,13 @@ public class DataMiscOrderItem {
 	private String PRODUCT;
 	private String quantity;
 	private String price;
-	private String fixedcost;
+	private String description;
 	
-	public DataMiscOrderItem(String PRODUCT, String quantity, String price, String fixedcost){
+	public DataMiscOrderItem(String PRODUCT, String quantity, String price, String description){
 		this.PRODUCT = PRODUCT;
 		this.quantity = quantity;
 		this.price = price;
-		this.fixedcost = fixedcost;
+		this.description = description;
 	}
 	
 	public String getPRODUCT(){
@@ -25,7 +25,7 @@ public class DataMiscOrderItem {
 		return price;
 	}
 	
-	public String getFixedcost(){
-		return fixedcost;
+	public String getDescription(){
+		return description;
 	}
 }

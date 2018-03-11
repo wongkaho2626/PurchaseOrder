@@ -388,7 +388,7 @@ public class CreateGUIViewerPOViewMisc {
 			});
 			poInsertMiscPanel.add(poInsertMiscProductQuantityTextField[i], gbc);
 
-			poInsertMiscDescriptionTextField[i] = new JTextField();
+			poInsertMiscDescriptionTextField[i] = new JTextField(miscOrderItemStatement.get(i).getDescription());
 			poInsertMiscDescriptionTextField[i].setEditable(false);
 			gbc.gridwidth = 4;
 			gbc.gridx = 2;
@@ -417,7 +417,7 @@ public class CreateGUIViewerPOViewMisc {
 			});
 			poInsertMiscPanel.add(poInsertMiscProductPriceTextField[i], gbc);
 
-			poInsertMiscProductFixedCostTextField[i] = new JTextField(miscOrderItemStatement.get(i).getFixedcost());
+			poInsertMiscProductFixedCostTextField[i] = new JTextField();
 //			poInsertMiscProductFixedCostTextField[i].setEditable(false);
 //			gbc.gridwidth = 1;
 //			gbc.gridx = 7;
@@ -618,7 +618,7 @@ public class CreateGUIViewerPOViewMisc {
 		
 		maintenanceStatement = irbs.maintenanceStatement(poInsertMiscProductNoTextField[i].getText());
 		if(!poInsertMiscProductNoTextField[i].getText().equals("")){
-			poInsertMiscDescriptionTextField[i].setText(maintenanceStatement[1]);	
+//			poInsertMiscDescriptionTextField[i].setText(maintenanceStatement[1]);	
 			poInsertMiscDutyCodeTextField[i].setText(maintenanceStatement[2]);	
 		}
 		try {

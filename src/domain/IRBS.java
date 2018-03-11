@@ -896,14 +896,14 @@ public class IRBS {
 	}
 	
 	//insert the Order Item of the Misc Purchase Order
-	public void insertMiscOrderItem(int poNumber, String PRODUCT, int quantity, double price, String fixedcost) throws SQLException{
-		String sql = ("INSERT INTO miscOrderItem (poNumber, PRODUCT, quantity, price, fixedcost) VALUES (?, ?, ?, ?, ?)");
+	public void insertMiscOrderItem(int poNumber, String PRODUCT, int quantity, double price, String description) throws SQLException{
+		String sql = ("INSERT INTO miscOrderItem (poNumber, PRODUCT, quantity, price, description) VALUES (?, ?, ?, ?, ?)");
 		java.sql.PreparedStatement updateQuery = connect.con.prepareStatement(sql);
 		updateQuery.setInt(1, poNumber);
 		updateQuery.setString(2, PRODUCT);
 		updateQuery.setInt(3, quantity);
 		updateQuery.setDouble(4, price);
-		updateQuery.setString(5, fixedcost);
+		updateQuery.setString(5, description);
 		updateQuery.executeUpdate();
 		System.out.println(updateQuery);
 	}
@@ -1218,7 +1218,7 @@ public class IRBS {
 				String sql = ("SELECT * FROM miscOrderItem	WHERE poNumber = " + poNumber); 
 				connect.rs = connect.st.executeQuery(sql);
 				while(connect.rs.next()){
-					DataMiscOrderItem temp = new DataMiscOrderItem(connect.rs.getString("PRODUCT"), connect.rs.getString("quantity"), connect.rs.getString("price"), connect.rs.getString("fixedcost"));
+					DataMiscOrderItem temp = new DataMiscOrderItem(connect.rs.getString("PRODUCT"), connect.rs.getString("quantity"), connect.rs.getString("price"), connect.rs.getString("description"));
 					miscOrderItemStatement.add(temp);
 				}			
 			}catch(Exception ex){
