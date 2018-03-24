@@ -602,11 +602,11 @@ public class CreateGUIPOSparePartChange {
 								poInsertSparePartProductFixedCostTextField[finalcntSparePartProduct].setText(maintenanceStatement[3]);
 								poInsertSparePartProductVendorTextField[finalcntSparePartProduct].setText(maintenanceStatement[5]);
 							}
-							if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){  
-								if(poInsertSparePartProductNoTextField[finalcntSparePartProduct].getText().length() == 2 && notInteger(poInsertSparePartProductNoTextField[finalcntSparePartProduct].getText()) == false){
-									poInsertSparePartProductNoTextField[finalcntSparePartProduct].setText(poInsertSparePartProductNoTextField[finalcntSparePartProduct].getText() + "-");
-								}
-							}
+//							if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){  
+//								if(poInsertSparePartProductNoTextField[finalcntSparePartProduct].getText().length() == 2 && notInteger(poInsertSparePartProductNoTextField[finalcntSparePartProduct].getText()) == false){
+//									poInsertSparePartProductNoTextField[finalcntSparePartProduct].setText(poInsertSparePartProductNoTextField[finalcntSparePartProduct].getText() + "-");
+//								}
+//							}
 							try {
 								irbs.getCon().close();
 							} catch (SQLException e1) {
@@ -1108,11 +1108,11 @@ public class CreateGUIPOSparePartChange {
 							poInsertSparePartVendorTextField.setText(maintenanceStatement[5]);
 						}
 					}
-					if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
-						if(poInsertSparePartProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertSparePartProductNoTextField[cntlocation].getText()) == false){
-							poInsertSparePartProductNoTextField[cntlocation].setText(poInsertSparePartProductNoTextField[cntlocation].getText() + "-");
-						}
-					}
+//					if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+//						if(poInsertSparePartProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertSparePartProductNoTextField[cntlocation].getText()) == false){
+//							poInsertSparePartProductNoTextField[cntlocation].setText(poInsertSparePartProductNoTextField[cntlocation].getText() + "-");
+//						}
+//					}
 					try {
 						irbs.getCon().close();
 					} catch (SQLException e1) {

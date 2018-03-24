@@ -216,11 +216,11 @@ public class CreateGUIPOView {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
-					if(poViewProductNoTextField.getText().length() == 2 && notInteger(poViewProductNoTextField.getText()) == false){
-						poViewProductNoTextField.setText(poViewProductNoTextField.getText() + "-");
-					}
-				}
+//				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+//					if(poViewProductNoTextField.getText().length() == 2 && notInteger(poViewProductNoTextField.getText()) == false){
+//						poViewProductNoTextField.setText(poViewProductNoTextField.getText() + "-");
+//					}
+//				}
 				poViewPanel.revalidate();  
 				poViewPanel.repaint();
 			}

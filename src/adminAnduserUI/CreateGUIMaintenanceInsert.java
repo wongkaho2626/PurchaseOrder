@@ -92,11 +92,11 @@ public class CreateGUIMaintenanceInsert {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
-					if(maintenanceInsertProductTextField.getText().length() == 2 && notDouble(maintenanceInsertProductTextField.getText()) == false){
-						maintenanceInsertProductTextField.setText(maintenanceInsertProductTextField.getText() + "-");
-					}
-				}
+//				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+//					if(maintenanceInsertProductTextField.getText().length() == 2 && notDouble(maintenanceInsertProductTextField.getText()) == false){
+//						maintenanceInsertProductTextField.setText(maintenanceInsertProductTextField.getText() + "-");
+//					}
+//				}
 			}
 		});
 		maintenanceInsertPanel.add(maintenanceInsertProductTextField, gbc);

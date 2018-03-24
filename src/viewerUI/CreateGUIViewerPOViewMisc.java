@@ -348,9 +348,9 @@ public class CreateGUIViewerPOViewMisc {
 						
 						setMaintenance(i);
 						
-						if(poInsertMiscProductNoTextField[i].getText().length() == 2 && notInteger(poInsertMiscProductNoTextField[i].getText()) == false){
-							poInsertMiscProductNoTextField[i].setText(poInsertMiscProductNoTextField[i].getText() + "-");
-						}
+//						if(poInsertMiscProductNoTextField[i].getText().length() == 2 && notInteger(poInsertMiscProductNoTextField[i].getText()) == false){
+//							poInsertMiscProductNoTextField[i].setText(poInsertMiscProductNoTextField[i].getText() + "-");
+//						}
 
 						poInsertMiscPanel.revalidate();  
 						poInsertMiscPanel.repaint();

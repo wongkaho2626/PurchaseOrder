@@ -8,6 +8,8 @@ import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -181,6 +183,17 @@ public class CreateGUILogin {
 		loginPasswordTextField = new JPasswordField();
 		gbc.gridx = 1;
 		gbc.gridy = 2;
+		loginPasswordTextField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					try {
+						login();
+					} catch (Exception e1) {
+						
+					}
+				}
+			}
+		});
 		loginPanel.add(loginPasswordTextField, gbc);
 		
 		try { 
@@ -225,42 +238,7 @@ public class CreateGUILogin {
 		loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				IPandPort IPandPort = new IPandPort();
-				IPandPort.setIP(ipTextField.getText());
-				IPandPort.setPort(portTextField.getText());
-				System.out.println(ipTextField.getText() + ":" + portTextField.getText());
-				IRBS irbs = new IRBS();
-				try {
-					String staffID = loginStaffIDTextField.getText();
-					String password = loginPasswordTextField.getText();
-					MD5 md5 = new MD5();
-					if (irbs.loginAdmin(staffID,md5.getMD5(password))) {						
-						CreateGUIBackgroundAdmin gui = new CreateGUIBackgroundAdmin(loginStaffIDTextField.getText());
-						theFrame.dispose();
-					} else if(irbs.loginUser(staffID,md5.getMD5(password))){						
-						CreateGUIBackgroundUser gui = new CreateGUIBackgroundUser(loginStaffIDTextField.getText());
-						theFrame.dispose();
-					}else if(irbs.loginViewer(staffID,md5.getMD5(password))){						
-						CreateViewerGUI gui = new CreateViewerGUI(loginStaffIDTextField.getText());
-						theFrame.dispose();
-					}else{
-						loginStaffIDTextField.setText("");
-						loginPasswordTextField.setText("");
-						JOptionPane
-								.showMessageDialog(
-										loginPanel,
-										"Please make sure you have input correct Staff ID and corresponding password!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-					}
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				} finally {
-					try {
-						irbs.getCon().close();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-				}
+				login();
 			}
 		});
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -290,5 +268,43 @@ public class CreateGUILogin {
 		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	private void login() {
+		IPandPort IPandPort = new IPandPort();
+		IPandPort.setIP(ipTextField.getText());
+		IPandPort.setPort(portTextField.getText());
+		System.out.println(ipTextField.getText() + ":" + portTextField.getText());
+		IRBS irbs = new IRBS();
+		try {
+			String staffID = loginStaffIDTextField.getText();
+			String password = loginPasswordTextField.getText();
+			MD5 md5 = new MD5();
+			if (irbs.loginAdmin(staffID,md5.getMD5(password))) {						
+				CreateGUIBackgroundAdmin gui = new CreateGUIBackgroundAdmin(loginStaffIDTextField.getText());
+				theFrame.dispose();
+			} else if(irbs.loginUser(staffID,md5.getMD5(password))){						
+				CreateGUIBackgroundUser gui = new CreateGUIBackgroundUser(loginStaffIDTextField.getText());
+				theFrame.dispose();
+			}else if(irbs.loginViewer(staffID,md5.getMD5(password))){						
+				CreateViewerGUI gui = new CreateViewerGUI(loginStaffIDTextField.getText());
+				theFrame.dispose();
+			}else{
+				loginStaffIDTextField.setText("");
+				loginPasswordTextField.setText("");
+				JOptionPane
+						.showMessageDialog(
+								loginPanel,
+								"Please make sure you have input correct Staff ID and corresponding password!",
+								"Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				irbs.getCon().close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 
 }

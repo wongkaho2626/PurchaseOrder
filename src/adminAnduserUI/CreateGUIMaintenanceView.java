@@ -93,11 +93,11 @@ public class CreateGUIMaintenanceView {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
-					if(maintenanceViewProductTextField.getText().length() == 2 && notInteger(maintenanceViewProductTextField.getText()) == false){
-						maintenanceViewProductTextField.setText(maintenanceViewProductTextField.getText() + "-");
-					}
-				}
+//				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+//					if(maintenanceViewProductTextField.getText().length() == 2 && notInteger(maintenanceViewProductTextField.getText()) == false){
+//						maintenanceViewProductTextField.setText(maintenanceViewProductTextField.getText() + "-");
+//					}
+//				}
 			}
 		});
 		maintenanceViewPanel.add(maintenanceViewProductTextField, gbc);

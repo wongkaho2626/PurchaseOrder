@@ -90,14 +90,14 @@ public class CreateGUIReportSACompleteUnit {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				
-				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){
-					if(productNoTextField.getText().length() == 2 && notInteger(productNoTextField.getText()) == false){
-						productNoTextField.setText(productNoTextField.getText() + "-");
-					}
-					
-					reportPanel.revalidate();  
-					reportPanel.repaint();
-				}
+//				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){
+//					if(productNoTextField.getText().length() == 2 && notInteger(productNoTextField.getText()) == false){
+//						productNoTextField.setText(productNoTextField.getText() + "-");
+//					}
+//				}
+				
+				reportPanel.revalidate();  
+				reportPanel.repaint();
 			}
 		});
 		reportPanel.add(productNoTextField, gbc);

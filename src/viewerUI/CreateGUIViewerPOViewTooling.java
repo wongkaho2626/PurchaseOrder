@@ -386,9 +386,9 @@ public class CreateGUIViewerPOViewTooling {
 						
 						setMaintenance(i);
 						
-						if(poInsertToolingProductNoTextField[i].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[i].getText()) == false){
-							poInsertToolingProductNoTextField[i].setText(poInsertToolingProductNoTextField[i].getText() + "-");
-						}
+//						if(poInsertToolingProductNoTextField[i].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[i].getText()) == false){
+//							poInsertToolingProductNoTextField[i].setText(poInsertToolingProductNoTextField[i].getText() + "-");
+//						}
 
 						poInsertToolingPanel.revalidate();  
 						poInsertToolingPanel.repaint();

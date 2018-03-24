@@ -473,9 +473,9 @@ public class CreateGUIViewerPOViewSparePart {
 						poInsertSparePartProductVendorTextField[cntlocation].setText(maintenanceStatement[5]);
 					}
 
-					if(poInsertSparePartProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertSparePartProductNoTextField[cntlocation].getText()) == false){
-						poInsertSparePartProductNoTextField[cntlocation].setText(poInsertSparePartProductNoTextField[cntlocation].getText() + "-");
-					}
+//					if(poInsertSparePartProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertSparePartProductNoTextField[cntlocation].getText()) == false){
+//						poInsertSparePartProductNoTextField[cntlocation].setText(poInsertSparePartProductNoTextField[cntlocation].getText() + "-");
+//					}
 					try {
 						irbs.getCon().close();
 					} catch (SQLException e1) {

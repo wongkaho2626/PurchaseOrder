@@ -596,9 +596,9 @@ public class CreateGUIViewerPOViewCompleteUnit {
 						poInsertCompleteUnitProductPurchaseCodeTextField[cntlocation].setText(maintenanceStatement[4]);
 					}
 
-					if(poInsertCompleteUnitProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertCompleteUnitProductNoTextField[cntlocation].getText()) == false){
-						poInsertCompleteUnitProductNoTextField[cntlocation].setText(poInsertCompleteUnitProductNoTextField[cntlocation].getText() + "-");
-					}
+//					if(poInsertCompleteUnitProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertCompleteUnitProductNoTextField[cntlocation].getText()) == false){
+//						poInsertCompleteUnitProductNoTextField[cntlocation].setText(poInsertCompleteUnitProductNoTextField[cntlocation].getText() + "-");
+//					}
 					try {
 						irbs.getCon().close();
 					} catch (SQLException e1) {

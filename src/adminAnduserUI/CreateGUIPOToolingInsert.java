@@ -401,11 +401,11 @@ public class CreateGUIPOToolingInsert {
 						public void keyReleased(KeyEvent e) {
 							for(int i=0; i <= cntToolingProduct; i++){
 								IRBS irbs = new IRBS();
-								if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
-									if(poInsertToolingProductNoTextField[i].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[i].getText()) == false){
-										poInsertToolingProductNoTextField[i].setText(poInsertToolingProductNoTextField[i].getText() + "-");
-									}
-								}
+//								if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+//									if(poInsertToolingProductNoTextField[i].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[i].getText()) == false){
+//										poInsertToolingProductNoTextField[i].setText(poInsertToolingProductNoTextField[i].getText() + "-");
+//									}
+//								}
 								try {
 									irbs.getCon().close();
 								} catch (SQLException e1) {
@@ -541,11 +541,11 @@ public class CreateGUIPOToolingInsert {
 				if(!poInsertToolingProductNoTextField[0].getText().equals("")){
 					poInsertToolingACRONYMTextField[0].setText(maintenanceStatement[0]);	
 				}
-				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
-					if(poInsertToolingProductNoTextField[0].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[0].getText()) == false){
-						poInsertToolingProductNoTextField[0].setText(poInsertToolingProductNoTextField[0].getText() + "-");
-					}
-				}
+//				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+//					if(poInsertToolingProductNoTextField[0].getText().length() == 2 && notInteger(poInsertToolingProductNoTextField[0].getText()) == false){
+//						poInsertToolingProductNoTextField[0].setText(poInsertToolingProductNoTextField[0].getText() + "-");
+//					}
+//				}
 				try {
 					irbs.getCon().close();
 				} catch (SQLException e1) {

@@ -806,9 +806,9 @@ public class CreateGUIPOCompleteUnitChange {
 								poInsertCompleteUnitProductFixedCostTextField[finalcntCompleteUnitProduct].setText(maintenanceStatement[3]);
 								poInsertCompleteUnitProductPurchaseCodeTextField[finalcntCompleteUnitProduct].setText(maintenanceStatement[4]);
 							}
-							if(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText().length() == 2 && notInteger(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText()) == false){
-								poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].setText(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText() + "-");
-							}
+//							if(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText().length() == 2 && notInteger(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText()) == false){
+//								poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].setText(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText() + "-");
+//							}
 							try {
 								irbs.getCon().close();
 							} catch (SQLException e1) {
@@ -1199,9 +1199,9 @@ public class CreateGUIPOCompleteUnitChange {
 						poInsertCompleteUnitProductPurchaseCodeTextField[cntlocation].setText(maintenanceStatement[4]);
 					}
 
-					if(poInsertCompleteUnitProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertCompleteUnitProductNoTextField[cntlocation].getText()) == false){
-						poInsertCompleteUnitProductNoTextField[cntlocation].setText(poInsertCompleteUnitProductNoTextField[cntlocation].getText() + "-");
-					}
+//					if(poInsertCompleteUnitProductNoTextField[cntlocation].getText().length() == 2 && notInteger(poInsertCompleteUnitProductNoTextField[cntlocation].getText()) == false){
+//						poInsertCompleteUnitProductNoTextField[cntlocation].setText(poInsertCompleteUnitProductNoTextField[cntlocation].getText() + "-");
+//					}
 					try {
 						irbs.getCon().close();
 					} catch (SQLException e1) {

@@ -625,12 +625,12 @@ public class CreateGUIPOCompleteUnitInsert {
 								poInsertCompleteUnitProductFixedCostTextField[finalcntCompleteUnitProduct].setText(maintenanceStatement[3]);
 								poInsertCompleteUnitProductPurchaseCodeTextField[finalcntCompleteUnitProduct].setText(maintenanceStatement[4]);
 							}
-							if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){
-								if(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText().length() == 2 && 
-										notInteger(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText()) == false){
-									poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].setText(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText() + "-");
-								}
-							}
+//							if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){
+//								if(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText().length() == 2 && 
+//										notInteger(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText()) == false){
+//									poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].setText(poInsertCompleteUnitProductNoTextField[finalcntCompleteUnitProduct].getText() + "-");
+//								}
+//							}
 							try {
 								irbs.getCon().close();
 							} catch (SQLException e1) {
@@ -1018,12 +1018,12 @@ public class CreateGUIPOCompleteUnitInsert {
 					poInsertCompleteUnitProductPurchaseCodeTextField[0].setText(maintenanceStatement[4]);
 					poInsertCompleteUnitVendorTextField.setText(maintenanceStatement[5]);
 				}
-				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){
-					if(poInsertCompleteUnitProductNoTextField[0].getText().length() == 2 && 
-							notInteger(poInsertCompleteUnitProductNoTextField[0].getText()) == false){
-						poInsertCompleteUnitProductNoTextField[0].setText(poInsertCompleteUnitProductNoTextField[0].getText() + "-");
-					}
-				}
+//				if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){
+//					if(poInsertCompleteUnitProductNoTextField[0].getText().length() == 2 && 
+//							notInteger(poInsertCompleteUnitProductNoTextField[0].getText()) == false){
+//						poInsertCompleteUnitProductNoTextField[0].setText(poInsertCompleteUnitProductNoTextField[0].getText() + "-");
+//					}
+//				}
 				try {
 					irbs.getCon().close();
 				} catch (SQLException e1) {
