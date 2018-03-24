@@ -71,7 +71,7 @@ public class CreateTotalUnitReport extends AbstractReport{
 				//create the title of excel file
 				HSSFRow rowhead = sheet.createRow((short)0);
 				reportTotalUnitHeaderCellStyle(workbook, rowhead, sheet);
-				rowhead.getCell(0).setCellValue("TOTAL OF UNITS SHIPPED FROM " + startETD + " TO " + endETD);
+				rowhead.getCell(0).setCellValue("TOTAL OF UNITS ORDERED REPORT FROM " + startETD + " TO " + endETD);
 
 				if(data.size() > 0){
 					//build the sub-vendor field
@@ -79,7 +79,7 @@ public class CreateTotalUnitReport extends AbstractReport{
 					row.createCell(0).setCellValue("Vendor: " + data.get(0).getVendor());
 
 					row = sheet.createRow((short)3);
-					row.createCell(0).setCellValue("PART NO");
+					row.createCell(0).setCellValue("ACRONYM");
 					reportTotalUnitRowWithBorderCellStyle(workbook, row, sheet, 0, false, false, false, false, true, false);
 					row.createCell(1).setCellValue("QUANTITY");
 					reportTotalUnitRowWithBorderCellStyle(workbook, row, sheet, 1, false, false, false, false, false, true);
@@ -106,7 +106,8 @@ public class CreateTotalUnitReport extends AbstractReport{
 							row.createCell(0).setCellValue("Vendor: " + data.get(cntData+1).getVendor());
 							cntColumn++;
 							row = sheet.createRow((short)cntColumn);
-							row.createCell(0).setCellValue("PART NO");
+							row.createCell(0).setCellValue("ACRONYM");
+							reportTotalUnitRowWithBorderCellStyle(workbook, row, sheet, 0, false, false, false, false, true, false);
 							row.createCell(1).setCellValue("QUANTITY");
 							reportTotalUnitRowWithBorderCellStyle(workbook, row, sheet, 1, false, false, false, false, false, true);
 							row.createCell(2).setCellValue("TOTAL UNITS");

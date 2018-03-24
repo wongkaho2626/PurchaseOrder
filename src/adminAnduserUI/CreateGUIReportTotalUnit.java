@@ -58,7 +58,7 @@ public class CreateGUIReportTotalUnit {
 		// ========================= reportPanel Level One UI Create
 		// =========================
 
-		reportLabel = new JLabel("Total Unit Report");
+		reportLabel = new JLabel("Total Unit Ordered Report");
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		//gbc.ipadx = 100;
 		gbc.gridwidth = 8;
@@ -181,11 +181,26 @@ public class CreateGUIReportTotalUnit {
 					IRBS irbs = new IRBS();
 					String sql = "";
 					if(!StringUtils.isEmptyOrWhitespaceOnly(selectCustomerNameComboBox.getSelectedItem().toString())){
+						//for shipment quantity
+//						sql = "SELECT maintenance.purchaseCode, "
+//								+ "completeunitPurchaseOrder.vendor, "
+//								+ "SUM(completeunitShipment.quantity) AS quantity "
+//								+ "FROM completeunitPurchaseOrder, completeunitShipment, maintenance "
+//								+ "WHERE completeunitShipment.poNumber = completeunitPurchaseOrder.poNumber "
+//								+ "AND completeunitShipment.PRODUCT = maintenance.PRODUCT "
+//								+ "AND completeunitShipment.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
+//								+ "AND completeunitShipment.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') "
+//								+ "AND completeunitPurchaseOrder.customerName = \'" + irbs.customerNameId(selectCustomerNameComboBox.getSelectedItem().toString()) + "\' "
+//								+ "GROUP BY completeunitPurchaseOrder.vendor, maintenance.purchaseCode "
+//								+ "ORDER BY completeunitPurchaseOrder.vendor, maintenance.purchaseCode";
+						
+						//for order quantity
 						sql = "SELECT maintenance.purchaseCode, "
 								+ "completeunitPurchaseOrder.vendor, "
-								+ "SUM(completeunitShipment.quantity) AS quantity "
-								+ "FROM completeunitPurchaseOrder, completeunitShipment, maintenance "
+								+ "SUM(completeunitOrderItem.quantity) AS quantity "
+								+ "FROM completeunitPurchaseOrder, completeunitOrderItem, completeunitShipment, maintenance "
 								+ "WHERE completeunitShipment.poNumber = completeunitPurchaseOrder.poNumber "
+								+ "AND completeunitOrderItem.poNumber = completeunitPurchaseOrder.poNumber "
 								+ "AND completeunitShipment.PRODUCT = maintenance.PRODUCT "
 								+ "AND completeunitShipment.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
 								+ "AND completeunitShipment.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') "
@@ -193,11 +208,25 @@ public class CreateGUIReportTotalUnit {
 								+ "GROUP BY completeunitPurchaseOrder.vendor, maintenance.purchaseCode "
 								+ "ORDER BY completeunitPurchaseOrder.vendor, maintenance.purchaseCode";
 					}else{
+						//for shipment quantity
+//						sql = "SELECT maintenance.purchaseCode, "
+//								+ "completeunitPurchaseOrder.vendor, "
+//								+ "SUM(completeunitShipment.quantity) AS quantity "
+//								+ "FROM completeunitPurchaseOrder, completeunitShipment, maintenance "
+//								+ "WHERE completeunitShipment.poNumber = completeunitPurchaseOrder.poNumber "
+//								+ "AND completeunitShipment.PRODUCT = maintenance.PRODUCT "
+//								+ "AND completeunitShipment.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
+//								+ "AND completeunitShipment.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') "
+//								+ "GROUP BY completeunitPurchaseOrder.vendor, maintenance.purchaseCode "
+//								+ "ORDER BY completeunitPurchaseOrder.vendor, maintenance.purchaseCode";
+						
+						//for order quantity
 						sql = "SELECT maintenance.purchaseCode, "
 								+ "completeunitPurchaseOrder.vendor, "
-								+ "SUM(completeunitShipment.quantity) AS quantity "
-								+ "FROM completeunitPurchaseOrder, completeunitShipment, maintenance "
+								+ "SUM(completeunitOrderItem.quantity) AS quantity "
+								+ "FROM completeunitPurchaseOrder, completeunitOrderItem, completeunitShipment, maintenance "
 								+ "WHERE completeunitShipment.poNumber = completeunitPurchaseOrder.poNumber "
+								+ "AND completeunitOrderItem.poNumber = completeunitPurchaseOrder.poNumber "
 								+ "AND completeunitShipment.PRODUCT = maintenance.PRODUCT "
 								+ "AND completeunitShipment.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
 								+ "AND completeunitShipment.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') "
