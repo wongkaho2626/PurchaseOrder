@@ -50,6 +50,7 @@ public class CreateGUIBackgroundAdmin {
 	private JMenuItem reportPRODUCTDataBaseMenuItem;
 	private JMenuItem reportSACompleteUnitMenuItem;
 	private JMenuItem reportSASparePartMenuItem;
+	private JMenuItem reportTotalOfUnitsOrderedAndShippedMenuItem;
 	
 	private JMenuItem controlOwnAccountMenuItem;
 	private JMenuItem controlOtherAccountMenuItem;
@@ -202,6 +203,7 @@ public class CreateGUIBackgroundAdmin {
 		reportPRODUCTDataBaseMenuItem = new JMenuItem("Vendor PRODUCT Database Report");
 		reportSACompleteUnitMenuItem = new JMenuItem("SA Complete Unit Report");
 		reportSASparePartMenuItem = new JMenuItem("SA Spare Part Report");
+		reportTotalOfUnitsOrderedAndShippedMenuItem = new JMenuItem("Total of Units Ordered and Shipped Report");
 		reportTotalUnitsMenuItem.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -256,12 +258,22 @@ public class CreateGUIBackgroundAdmin {
 				}
 			}
 		});
+		reportTotalOfUnitsOrderedAndShippedMenuItem.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CreateGUIReportTotalOfUnitsOrderedAndShipped reportTotalOfUnitsOrderedAndShippedGUI = new CreateGUIReportTotalOfUnitsOrderedAndShipped();
+				if (!theFrame.getContentPane().equals(reportTotalOfUnitsOrderedAndShippedGUI.reportPane())) {
+					changePanelToReportTotalOfUnitsOrderedAndShippedPanel();
+				}
+			}
+		});
 		reportMenu.add(reportTotalUnitsMenuItem);
 		reportMenu.add(reportSalesMenuItem);
 		reportMenu.add(reportDateVendorMenuItem);
 		reportMenu.add(reportPRODUCTDataBaseMenuItem);
 		reportMenu.add(reportSACompleteUnitMenuItem);		
 		reportMenu.add(reportSASparePartMenuItem);
+		reportMenu.add(reportTotalOfUnitsOrderedAndShippedMenuItem);
 
 		// Initialize the Account Menu and the Item(s)
 		// Add it to Menu with .addActionListener
@@ -551,6 +563,17 @@ public class CreateGUIBackgroundAdmin {
 		theFrame.remove(theFrame.getContentPane());
 		CreateGUIReportSASparePart reportSASparePartGUI = new CreateGUIReportSASparePart();
 		theFrame.setContentPane(reportSASparePartGUI.reportPane());
+		theFrame.setVisible(true);
+	}
+	
+	// ========================= use the report Total of Units Ordered and Shipped panel
+	// =========================
+	private void changePanelToReportTotalOfUnitsOrderedAndShippedPanel() {
+		theFrame.repaint();
+		theFrame.revalidate();
+		theFrame.remove(theFrame.getContentPane());
+		CreateGUIReportTotalOfUnitsOrderedAndShipped reportTotalOfUnitsOrderedAndShippedGUI = new CreateGUIReportTotalOfUnitsOrderedAndShipped();
+		theFrame.setContentPane(reportTotalOfUnitsOrderedAndShippedGUI.reportPane());
 		theFrame.setVisible(true);
 	}
 

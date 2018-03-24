@@ -1453,6 +1453,33 @@ public class IRBS {
 		}
 	}
 	
+	//report the total unit
+	public int reportTotalOfUnitsOrderedAndShipped(ArrayList<String> sqlList){
+		int result = 0;
+		for(String sql : sqlList) {
+			try{
+				connect.rs = connect.st.executeQuery(sql);
+	
+				ResultSetMetaData metaData = (ResultSetMetaData) connect.rs.getMetaData();
+				Vector<String> columnNames = new Vector<String>();
+				int columnCount = metaData.getColumnCount();
+				for (int column = 1; column <= columnCount; column++) {
+					columnNames.add(metaData.getColumnName(column));
+				}
+	
+				// data of the table
+				ArrayList<DataReportTotalUnit> data = new ArrayList<DataReportTotalUnit>();
+				while (connect.rs.next()) {
+					int quantity = connect.rs.getInt("quantity");
+					result += quantity;		        
+				}
+			}catch(Exception ex){
+				System.out.println("Error: "+ex);
+			}
+		}
+		return result;
+	}
+	
 	//get customer Name
 	public List<String> customerNameStatement(){
 		List<String> customerNameList = new ArrayList<>();
