@@ -61,6 +61,7 @@ public class CreateGUIPOCompleteUnitChange {
 	private JLabel[] poInsertCompleteUnitSAUnitLabel = new JLabel[1000];
 	private JLabel[] poInsertCompleteUnitSAInvoiceNoLabel = new JLabel[1000];
 	private JLabel[] poInsertCompleteUnitSARemainLabel = new JLabel[1000];
+	private JLabel[] poInsertCompleteUnitSAETDLabel = new JLabel[1000];
 	
 	private JSeparator[] poJSeparator = new JSeparator[100];
 
@@ -89,6 +90,7 @@ public class CreateGUIPOCompleteUnitChange {
 	private JTextField[][] poInsertCompleteUnitSAUnitTextField = new JTextField[100][1000];
 	private JTextField[][] poInsertCompleteUnitSAInvoiceNoTextField = new JTextField[100][1000];
 	private JTextField[][] poInsertCompleteUnitSARemainTextField = new JTextField[100][1000];
+	private JTextField[][] poInsertCompleteUnitSAETDTextField =  new JTextField[100][1000];
 	
 	private JTextArea poInsertCompleteUnitRemarkTextArea;
 	private JComboBox ETDLocation;
@@ -938,6 +940,12 @@ public class CreateGUIPOCompleteUnitChange {
 					gbc.gridx = 4;
 					gbc.gridy = gbccntCompleteUnitProduct[finalcntCompleteUnitProduct] + 3;
 					poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainLabel[finalcntCompleteUnitProduct], gbc);
+					
+					poInsertCompleteUnitSAETDLabel[finalcntCompleteUnitProduct] = new JLabel("ETD Date");
+					gbc.gridwidth = 1;
+					gbc.gridx = 5;
+					gbc.gridy = gbccntCompleteUnitProduct[finalcntCompleteUnitProduct] + 3;
+					poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDLabel[finalcntCompleteUnitProduct], gbc);
 
 					poInsertCompleteUnitIncreaseSAButton[finalcntCompleteUnitProduct] = new JButton("Increase");
 					gbc.gridwidth = 1;
@@ -995,6 +1003,36 @@ public class CreateGUIPOCompleteUnitChange {
 							poInsertCompleteUnitSARemainTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]].setEditable(false);
 							poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]], gbc);
 
+							poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]] = new JTextField();
+							gbc.gridwidth = 1;
+							gbc.gridx = 5;
+							gbc.gridy = gbccntCompleteUnitProduct[finalcntCompleteUnitProduct] + cntCompleteUnitSA[finalcntCompleteUnitProduct];
+							poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]].addKeyListener(new KeyListener(){
+								@Override
+								public void keyTyped(KeyEvent e) {}
+					
+								@Override
+								public void keyPressed(KeyEvent e) {}
+					
+								@Override
+								public void keyReleased(KeyEvent e) {
+									for(int i = 0; i <= cntCompleteUnitSA[finalcntCompleteUnitProduct]; i++){
+										if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){  
+											if(checkMM(poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][i].getText())){
+												poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][i].setText(poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][i].getText() + "/");
+											}
+											if(checkDD(poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][i].getText())){
+												poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][i].setText(poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][i].getText() + "/");
+											}
+											poInsertCompleteUnitPanel.revalidate();  
+											poInsertCompleteUnitPanel.repaint();
+										}
+									}
+								}
+							});
+							poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]], gbc);
+							
+							
 							poInsertCompleteUnitPanel.revalidate();  
 							poInsertCompleteUnitPanel.repaint();
 						}
@@ -1014,6 +1052,7 @@ public class CreateGUIPOCompleteUnitChange {
 								poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAUnitTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]]);
 								poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]]);
 								poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]]);
+								poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAETDTextField[finalcntCompleteUnitProduct][cntCompleteUnitSA[finalcntCompleteUnitProduct]]);
 								cntCompleteUnitSA[finalcntCompleteUnitProduct]--;
 							}else{
 								JOptionPane
@@ -1086,6 +1125,7 @@ public class CreateGUIPOCompleteUnitChange {
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAUnitTextField[cntCompleteUnitProduct][i]);
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoTextField[cntCompleteUnitProduct][i]);
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainTextField[cntCompleteUnitProduct][i]);
+						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAETDTextField[cntCompleteUnitProduct][i]);
 					}
 
 					poInsertCompleteUnitPanel.remove(poInsertCompleteUnitShowSAButton[cntCompleteUnitProduct]);
@@ -1335,6 +1375,13 @@ public class CreateGUIPOCompleteUnitChange {
 			gbc.gridy = 204 + cntlocation * 1000;
 			poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(false);
 			poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainLabel[cntlocation], gbc);
+			
+			poInsertCompleteUnitSAETDLabel[cntlocation] = new JLabel("ETD Date");
+			gbc.gridwidth = 1;
+			gbc.gridx = 5;
+			gbc.gridy = 204 + cntlocation * 1000;
+			poInsertCompleteUnitSAETDLabel[cntlocation].setVisible(false);
+			poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDLabel[cntlocation], gbc);
 
 			poInsertCompleteUnitIncreaseSAButton[cntlocation] = new JButton("Increase");
 			gbc.gridwidth = 1;
@@ -1392,6 +1439,36 @@ public class CreateGUIPOCompleteUnitChange {
 					poInsertCompleteUnitSARemainTextField[cntlocation][cntCompleteUnitSA[cntlocation]].setEditable(false);
 					poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainTextField[cntlocation][cntCompleteUnitSA[cntlocation]], gbc);
 
+					poInsertCompleteUnitSAETDTextField[cntlocation][cntCompleteUnitSA[cntlocation]] = new JTextField();
+					gbc.gridwidth = 1;
+					gbc.gridx = 5;
+					gbc.gridy = 205 + cntlocation * 1000 + cntCompleteUnitSA[cntlocation];
+					poInsertCompleteUnitSAETDTextField[cntlocation][cntCompleteUnitSA[cntlocation]].addKeyListener(new KeyListener(){
+						@Override
+						public void keyTyped(KeyEvent e) {}
+			
+						@Override
+						public void keyPressed(KeyEvent e) {}
+			
+						@Override
+						public void keyReleased(KeyEvent e) {
+							for(int i = 0; i <= cntCompleteUnitSA[cntlocation]; i++){
+								if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){ 
+									if(checkMM(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText())){
+										poInsertCompleteUnitSAETDTextField[cntlocation][i].setText(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText() + "/");
+									}
+									if(checkDD(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText())){
+										poInsertCompleteUnitSAETDTextField[cntlocation][i].setText(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText() + "/");
+									}
+									poInsertCompleteUnitPanel.revalidate();  
+									poInsertCompleteUnitPanel.repaint();
+								}
+							}
+						}
+					});
+					poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDTextField[cntlocation][cntCompleteUnitSA[cntlocation]], gbc);
+
+					
 					gbccntCompleteUnitSA++;
 
 					poInsertCompleteUnitPanel.revalidate();  
@@ -1415,6 +1492,7 @@ public class CreateGUIPOCompleteUnitChange {
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAUnitTextField[cntlocation][cntCompleteUnitSA[cntlocation]]);
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][cntCompleteUnitSA[cntlocation]]);
 						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainTextField[cntlocation][cntCompleteUnitSA[cntlocation]]);
+						poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAETDTextField[cntlocation][cntCompleteUnitSA[cntlocation]]);
 						gbccntCompleteUnitSA--;
 						cntCompleteUnitSA[cntlocation]--;
 					}else{
@@ -1480,6 +1558,36 @@ public class CreateGUIPOCompleteUnitChange {
 				poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setEditable(false);
 				poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(false);
 				poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainTextField[cntlocation][finalj], gbc);
+				
+				poInsertCompleteUnitSAETDTextField[cntlocation][finalj] = new JTextField(SAStatement.get(cntlocation).get(j).getETD());
+				gbc.gridwidth = 1;
+				gbc.gridx = 5;
+				gbc.gridy = gbccntCompleteUnitSA + finalj + cntlocation * 1000;
+				poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setVisible(false);
+				poInsertCompleteUnitSAETDTextField[cntlocation][finalj].addKeyListener(new KeyListener(){
+					@Override
+					public void keyTyped(KeyEvent e) {}
+		
+					@Override
+					public void keyPressed(KeyEvent e) {}
+		
+					@Override
+					public void keyReleased(KeyEvent e) {
+						for(int i = 0; i <= finalj; i++){
+							if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE){  
+								if(checkMM(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText())){
+									poInsertCompleteUnitSAETDTextField[cntlocation][i].setText(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText() + "/");
+								}
+								if(checkDD(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText())){
+									poInsertCompleteUnitSAETDTextField[cntlocation][i].setText(poInsertCompleteUnitSAETDTextField[cntlocation][i].getText() + "/");
+								}
+								poInsertCompleteUnitPanel.revalidate();  
+								poInsertCompleteUnitPanel.repaint();
+							}
+						}
+					}
+				});
+				poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDTextField[cntlocation][finalj], gbc);
 			}
 
 			poJSeparator[cntlocation] = new JSeparator(JSeparator.HORIZONTAL);
@@ -1510,7 +1618,7 @@ public class CreateGUIPOCompleteUnitChange {
 						}else{
 							irbs.deletePO(Integer.parseInt(poNumber));
 							SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-							String ChangedDate;
+							String ChangedDate, ChangedDate3;
 							ChangedDate = poInsertCompleteUnitOrderDateTextField[0].getText().substring(6, 8) + "/" + poInsertCompleteUnitOrderDateTextField[0].getText().substring(0, 2) + "/" + poInsertCompleteUnitOrderDateTextField[0].getText().substring(3, 5);
 							irbs.insertCompleteUnitPO(Integer.parseInt(poNumber), ChangedDate, poInsertCompleteUnitVendorTextField.getText(), ETDLocation.getSelectedItem().toString(), poInsertCompleteUnitRemarkTextArea.getText(), poInsertCompleteUnitDepositTextField.getText(), CustomerNameItem.getCustomerNameId(customerName.getSelectedItem().toString()));
 							if(cntCompleteUnitOrderDate > 0){
@@ -1533,7 +1641,8 @@ public class CreateGUIPOCompleteUnitChange {
 									irbs.insertCompleteUnitOrderItem(Integer.parseInt(poInsertCompleteUnitNoTextField.getText()), poInsertCompleteUnitProductNoTextField[i].getText(), poInsertCompleteUnitProductSubCodeTextField[i].getText(), Integer.parseInt(poInsertCompleteUnitProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertCompleteUnitProductPriceTextField[i].getText()), poInsertCompleteUnitProductFixedCostTextField[i].getText(), poInsertCompleteUnitProductPurchaseCodeTextField[i].getText(), "", Integer.parseInt(poInsertCompleteUnitProductQuantityTextField[i].getText().replace(",", "")));
 								}
 								for(int j = 0; j <= cntCompleteUnitSA[i]; j++){
-									irbs.insertSA(Integer.parseInt(poInsertCompleteUnitNoTextField.getText()),poInsertCompleteUnitSANoTextField[i][j].getText(),poInsertCompleteUnitProductNoTextField[i].getText() + poInsertCompleteUnitProductSubCodeTextField[i].getText(),poInsertCompleteUnitSAInvoiceNoTextField[i][j].getText(),Integer.parseInt(poInsertCompleteUnitSAUnitTextField[i][j].getText().replace(",", "")), null);
+									ChangedDate3 = poInsertCompleteUnitSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(3, 5);
+									irbs.insertSA(Integer.parseInt(poInsertCompleteUnitNoTextField.getText()),poInsertCompleteUnitSANoTextField[i][j].getText(),poInsertCompleteUnitProductNoTextField[i].getText() + poInsertCompleteUnitProductSubCodeTextField[i].getText(),poInsertCompleteUnitSAInvoiceNoTextField[i][j].getText(),Integer.parseInt(poInsertCompleteUnitSAUnitTextField[i][j].getText().replace(",", "")), ChangedDate3);
 								}
 							}
 
@@ -1612,6 +1721,8 @@ public class CreateGUIPOCompleteUnitChange {
 					check = false;
 				if(poInsertCompleteUnitSAUnitTextField[i][j].getText().equals(""))
 					check = false;
+				if(poInsertCompleteUnitSAETDTextField[i][j].getText().equals(""))
+					check = false;
 			}
 		}
 		for(int i = 0; i <= cntCompleteUnitShipment; i++){
@@ -1652,6 +1763,20 @@ public class CreateGUIPOCompleteUnitChange {
 				exception = e1;
 			} catch (Exception e1){
 				exception = e1;
+			}
+		}
+		for(int i = 0; i <= cntCompleteUnitProduct; i++){
+			for(int j = 0; j <= cntCompleteUnitSA[i]; j++){
+				try {
+					sdf.setLenient(false);
+					java.util.Date date = sdf.parse(poInsertCompleteUnitSAETDTextField[i][j].getText());
+					java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+					String ChangedDate = poInsertCompleteUnitSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(3, 5);
+				} catch (ParseException e1) {
+					exception = e1;
+				} catch (Exception e1){
+					exception = e1;
+				}
 			}
 		}
 		return exception;
@@ -1847,6 +1972,7 @@ public class CreateGUIPOCompleteUnitChange {
 				poInsertCompleteUnitSAUnitLabel[cntlocation].setVisible(true);
 				poInsertCompleteUnitSAInvoiceNoLabel[cntlocation].setVisible(true);
 				poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(true);
+				poInsertCompleteUnitSAETDLabel[cntlocation].setVisible(true);
 				poInsertCompleteUnitIncreaseSAButton[cntlocation].setVisible(true);
 				poInsertCompleteUnitDeleteSAButton[cntlocation].setVisible(true);
 				for(int j = 0; j < 1000; j++){
@@ -1855,12 +1981,14 @@ public class CreateGUIPOCompleteUnitChange {
 					poInsertCompleteUnitSAUnitTextField[cntlocation][finalj].setVisible(true);
 					poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][finalj].setVisible(true);
 					poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(true);
+					poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setVisible(true);
 				}
 			}else {
 				poInsertCompleteUnitShowSAButton[cntlocation].setText("Show SA");
 				poInsertCompleteUnitSAUnitLabel[cntlocation].setVisible(false);
 				poInsertCompleteUnitSAInvoiceNoLabel[cntlocation].setVisible(false);
 				poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(false);
+				poInsertCompleteUnitSAETDLabel[cntlocation].setVisible(false);
 				poInsertCompleteUnitIncreaseSAButton[cntlocation].setVisible(false);
 				poInsertCompleteUnitDeleteSAButton[cntlocation].setVisible(false);
 				for(int j = 0; j < 1000; j++){
@@ -1869,6 +1997,7 @@ public class CreateGUIPOCompleteUnitChange {
 					poInsertCompleteUnitSAUnitTextField[cntlocation][finalj].setVisible(false);
 					poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][finalj].setVisible(false);
 					poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(false);
+					poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setVisible(false);
 				}
 			}
 		}catch(Exception ex) {

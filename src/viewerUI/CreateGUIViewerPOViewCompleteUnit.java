@@ -60,6 +60,7 @@ public class CreateGUIViewerPOViewCompleteUnit {
 	private JLabel[] poInsertCompleteUnitSAUnitLabel = new JLabel[1000];
 	private JLabel[] poInsertCompleteUnitSAInvoiceNoLabel = new JLabel[1000];
 	private JLabel[] poInsertCompleteUnitSARemainLabel = new JLabel[1000];
+	private JLabel[] poInsertCompleteUnitSAETDLabel = new JLabel[1000];
 	
 	private JSeparator[] poJSeparator = new JSeparator[100];
 
@@ -88,6 +89,7 @@ public class CreateGUIViewerPOViewCompleteUnit {
 	private JTextField[][] poInsertCompleteUnitSAUnitTextField = new JTextField[100][1000];
 	private JTextField[][] poInsertCompleteUnitSAInvoiceNoTextField = new JTextField[100][1000];
 	private JTextField[][] poInsertCompleteUnitSARemainTextField = new JTextField[100][1000];
+	private JTextField[][] poInsertCompleteUnitSAETDTextField = new JTextField[100][1000];
 	
 	private JTextArea poInsertCompleteUnitRemarkTextArea;
 	private JComboBox ETDLocation;
@@ -736,6 +738,13 @@ public class CreateGUIViewerPOViewCompleteUnit {
 			gbc.gridy = 204 + cntlocation * 1000;
 			poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(false);
 			poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainLabel[cntlocation], gbc);
+			
+			poInsertCompleteUnitSAETDLabel[cntlocation] = new JLabel("ETD Date");
+			gbc.gridwidth = 1;
+			gbc.gridx = 4;
+			gbc.gridy = 204 + cntlocation * 1000;
+			poInsertCompleteUnitSAETDLabel[cntlocation].setVisible(false);
+			poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDLabel[cntlocation], gbc);
 
 			for(int j = 0; j < SAStatement.get(cntlocation).size(); j++){
 				final int finalj = j;
@@ -788,6 +797,14 @@ public class CreateGUIViewerPOViewCompleteUnit {
 				poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setEditable(false);
 				poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(false);
 				poInsertCompleteUnitPanel.add(poInsertCompleteUnitSARemainTextField[cntlocation][finalj], gbc);
+				
+				poInsertCompleteUnitSAETDTextField[cntlocation][finalj] = new JTextField(SAStatement.get(cntlocation).get(j).getETD());
+				gbc.gridwidth = 1;
+				gbc.gridx = 4;
+				gbc.gridy = gbccntCompleteUnitSA + finalj + cntlocation * 1000;
+				poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setEditable(false);
+				poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setVisible(false);
+				poInsertCompleteUnitPanel.add(poInsertCompleteUnitSAETDTextField[cntlocation][finalj], gbc);
 			}
 
 			poJSeparator[cntlocation] = new JSeparator(JSeparator.HORIZONTAL);
@@ -834,6 +851,10 @@ public class CreateGUIViewerPOViewCompleteUnit {
 				if(poInsertCompleteUnitSAInvoiceNoTextField[i][j].getText().equals(""))
 					check = false;
 				if(poInsertCompleteUnitSAUnitTextField[i][j].getText().equals(""))
+					check = false;
+				if(poInsertCompleteUnitSARemainTextField[i][j].getText().equals(""))
+					check = false;
+				if(poInsertCompleteUnitSAETDTextField[i][j].getText().equals(""))
 					check = false;
 			}
 		}
@@ -912,7 +933,8 @@ public class CreateGUIViewerPOViewCompleteUnit {
 			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSANoLabel[i]);
 			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAUnitLabel[i]);
 			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoLabel[i]);
-			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainLabel[i]);			
+			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainLabel[i]);
+			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAETDLabel[i]);			
 			
 			poInsertCompleteUnitPanel.remove(poJSeparator[i]);
 			
@@ -921,6 +943,7 @@ public class CreateGUIViewerPOViewCompleteUnit {
 				poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAUnitTextField[i][j]);
 				poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoTextField[i][j]);
 				poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainTextField[i][j]);
+				poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAETDTextField[i][j]);
 			}			
 			cntCompleteUnitSA[i] = -1;
 		}
@@ -933,6 +956,7 @@ public class CreateGUIViewerPOViewCompleteUnit {
 			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAUnitTextField[0][j]);
 			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAInvoiceNoTextField[0][j]);
 			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSARemainTextField[0][j]);
+			poInsertCompleteUnitPanel.remove(poInsertCompleteUnitSAETDTextField[0][j]);
 		}
 		cntCompleteUnitSA[0] = -1;
 
@@ -1173,24 +1197,28 @@ public class CreateGUIViewerPOViewCompleteUnit {
 				poInsertCompleteUnitSAUnitLabel[cntlocation].setVisible(true);
 				poInsertCompleteUnitSAInvoiceNoLabel[cntlocation].setVisible(true);
 				poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(true);
+				poInsertCompleteUnitSAETDLabel[cntlocation].setVisible(true);
 				for(int j = 0; j < 1000; j++){
 					final int finalj = j;
 					poInsertCompleteUnitSANoTextField[cntlocation][finalj].setVisible(true);
 					poInsertCompleteUnitSAUnitTextField[cntlocation][finalj].setVisible(true);
 					poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][finalj].setVisible(true);
 					poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(true);
+					poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setVisible(true);
 				}
 			}else {
 				poInsertCompleteUnitShowSAButton[cntlocation].setText("Show SA");
 				poInsertCompleteUnitSAUnitLabel[cntlocation].setVisible(false);
 				poInsertCompleteUnitSAInvoiceNoLabel[cntlocation].setVisible(false);
 				poInsertCompleteUnitSARemainLabel[cntlocation].setVisible(false);
+				poInsertCompleteUnitSAETDLabel[cntlocation].setVisible(false);
 				for(int j = 0; j < 1000; j++){
 					final int finalj = j;
 					poInsertCompleteUnitSANoTextField[cntlocation][finalj].setVisible(false);
 					poInsertCompleteUnitSAUnitTextField[cntlocation][finalj].setVisible(false);
 					poInsertCompleteUnitSAInvoiceNoTextField[cntlocation][finalj].setVisible(false);
 					poInsertCompleteUnitSARemainTextField[cntlocation][finalj].setVisible(false);
+					poInsertCompleteUnitSAETDTextField[cntlocation][finalj].setVisible(false);
 				}
 			}
 		}catch(Exception ex) {
