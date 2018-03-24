@@ -202,7 +202,7 @@ public class CreateGUIViewerPOViewSparePart {
 		gbc.insets = new Insets(5, 5, 5, 5);
 		poInsertSparePartPanel.add(poInsertSparePartLabel, gbc);
 
-		gbc.gridwidth = 10;
+		gbc.gridwidth = 12;
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		poInsertSparePartPanel.add(new JSeparator(JSeparator.HORIZONTAL), gbc);
@@ -229,12 +229,6 @@ public class CreateGUIViewerPOViewSparePart {
 		gbc.gridy = 2;
 		poInsertSparePartPanel.add(poInsertSparePartLabel, gbc);
 		
-//		poInsertSparePartLabel = new JLabel("Vendor");
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 3;
-//		gbc.gridy = 2;
-//		poInsertSparePartPanel.add(poInsertSparePartLabel, gbc);
-		
 		poInsertSparePartLabel = new JLabel("Total Quantity");
 		gbc.gridwidth = 1;
 		gbc.gridx = 2;
@@ -244,6 +238,12 @@ public class CreateGUIViewerPOViewSparePart {
 		poInsertSparePartLabel = new JLabel("Total Price");
 		gbc.gridwidth = 1;
 		gbc.gridx = 3;
+		gbc.gridy = 2;
+		poInsertSparePartPanel.add(poInsertSparePartLabel, gbc);
+		
+		poInsertSparePartLabel = new JLabel("Vendor");
+		gbc.gridwidth = 1;
+		gbc.gridx = 4;
 		gbc.gridy = 2;
 		poInsertSparePartPanel.add(poInsertSparePartLabel, gbc);
 		
@@ -309,12 +309,6 @@ public class CreateGUIViewerPOViewSparePart {
 			});
 			poInsertSparePartPanel.add(poInsertSparePartOrderDateTextField[i], gbc);
 		}
-
-		poInsertSparePartVendorTextField = new JTextField(vendor);
-//		gbc.gridwidth = 1;
-//		gbc.gridx = 3;
-//		gbc.gridy = 4;
-//		poInsertSparePartPanel.add(poInsertSparePartVendorTextField, gbc);
 		
 		poInsertSparePartTotalQuantityTextField = new JTextField("0");
 		poInsertSparePartTotalQuantityTextField.setEditable(false);
@@ -330,7 +324,14 @@ public class CreateGUIViewerPOViewSparePart {
 		gbc.gridy = 4;
 		poInsertSparePartPanel.add(poInsertSparePartTotalPriceTextField, gbc);
 		
-		gbc.gridwidth = 10;
+		poInsertSparePartVendorTextField = new JTextField(vendor);
+		poInsertSparePartVendorTextField.setEditable(false);
+		gbc.gridwidth = 1;
+		gbc.gridx = 4;
+		gbc.gridy = 4;
+		poInsertSparePartPanel.add(poInsertSparePartVendorTextField, gbc);
+		
+		gbc.gridwidth = 12;
 		gbc.gridx = 0;
 		gbc.gridy = 49;
 		poInsertSparePartPanel.add(new JSeparator(JSeparator.HORIZONTAL), gbc);
@@ -343,7 +344,7 @@ public class CreateGUIViewerPOViewSparePart {
 
 		poInsertSparePartRemarkTextArea = new JTextArea(remark);
 		poInsertSparePartRemarkTextArea.setEditable(false);
-		gbc.gridwidth = 11;
+		gbc.gridwidth = 12;
 		gbc.gridx = 0;
 		gbc.gridy = 51;
 		if(!remark.equals("")){
@@ -369,7 +370,7 @@ public class CreateGUIViewerPOViewSparePart {
 		});
 		poInsertSparePartPanel.add(poInsertSparePartRemarkTextArea, gbc);
 		
-		gbc.gridwidth = 10;
+		gbc.gridwidth = 12;
 		gbc.gridx = 0;
 		gbc.gridy = 52;
 		poInsertSparePartPanel.add(new JSeparator(JSeparator.HORIZONTAL), gbc);
@@ -401,45 +402,45 @@ public class CreateGUIViewerPOViewSparePart {
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductSubCodeLabel[cntlocation], gbc);
 			
-			poInsertSparePartProductDescriptionLabel[cntlocation] = new JLabel("Description                                                                                                               ");
-			gbc.gridwidth = 1;
+			poInsertSparePartProductDescriptionLabel[cntlocation] = new JLabel("Description");
+			gbc.gridwidth = 3;
 			gbc.gridx = 3;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductDescriptionLabel[cntlocation], gbc);
 
 			poInsertSparePartProductQuantityLabel[cntlocation] = new JLabel("Quantity");
 			gbc.gridwidth = 1;
-			gbc.gridx = 4;
+			gbc.gridx = 6;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductQuantityLabel[cntlocation], gbc);
 			
 			poInsertSparePartProductETDLabel[cntlocation] = new JLabel("Delivery Date");
 			gbc.gridwidth = 1;
-			gbc.gridx = 5;
+			gbc.gridx = 7;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductETDLabel[cntlocation], gbc);
 			
 			poInsertSparePartProductSRDLabel[cntlocation] = new JLabel("Ship To Arrive Date");
 			gbc.gridwidth = 1;
-			gbc.gridx = 6;
+			gbc.gridx = 8;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductSRDLabel[cntlocation], gbc);
 
 			poInsertSparePartProductUnitPriceLabel[cntlocation] = new JLabel("Unit Price");
 			gbc.gridwidth = 1;
-			gbc.gridx = 7;
+			gbc.gridx = 9;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductUnitPriceLabel[cntlocation], gbc);
 
 			poInsertSparePartProductDutyCodeLabel[cntlocation] = new JLabel("Duty Code");
 			gbc.gridwidth = 1;
-			gbc.gridx = 8;
+			gbc.gridx = 10;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductDutyCodeLabel[cntlocation], gbc);
 			
 			poInsertSparePartProductFixedCostLabel[cntlocation] = new JLabel("Fixed Cost");
 			gbc.gridwidth = 1;
-			gbc.gridx = 9;
+			gbc.gridx = 11;
 			gbc.gridy = 201 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductFixedCostLabel[cntlocation], gbc);
 			
@@ -497,7 +498,7 @@ public class CreateGUIViewerPOViewSparePart {
 			
 			poInsertSparePartDescriptionTextField[cntlocation] = new JTextField();
 			poInsertSparePartDescriptionTextField[cntlocation].setEditable(false);
-			gbc.gridwidth = 1;
+			gbc.gridwidth = 3;
 			gbc.gridx = 3;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartDescriptionTextField[cntlocation], gbc);
@@ -506,7 +507,7 @@ public class CreateGUIViewerPOViewSparePart {
 			poInsertSparePartProductQuantityTextField[cntlocation] = new JTextField(nf.format(Integer.parseInt(sparepartOrderItemStatement.get(cntlocation).getQuantity())));
 			poInsertSparePartProductQuantityTextField[cntlocation].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 4;
+			gbc.gridx = 6;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartProductQuantityTextField[cntlocation].addKeyListener(new KeyListener(){
 				@Override
@@ -534,7 +535,7 @@ public class CreateGUIViewerPOViewSparePart {
 			poInsertSparePartProductETDTextField[cntlocation] = new JTextField(sparepartOrderItemStatement.get(cntlocation).getETD());
 			poInsertSparePartProductETDTextField[cntlocation].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 5;
+			gbc.gridx = 7;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartProductETDTextField[cntlocation].addKeyListener(new KeyListener(){
 				@Override
@@ -561,7 +562,7 @@ public class CreateGUIViewerPOViewSparePart {
 			poInsertSparePartProductSRDTextField[cntlocation] = new JTextField(sparepartOrderItemStatement.get(cntlocation).getSRD());
 			poInsertSparePartProductSRDTextField[cntlocation].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 6;
+			gbc.gridx = 8;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartProductSRDTextField[cntlocation].addKeyListener(new KeyListener(){
 				@Override
@@ -588,7 +589,7 @@ public class CreateGUIViewerPOViewSparePart {
 			poInsertSparePartProductPriceTextField[cntlocation] = new JTextField(sparepartOrderItemStatement.get(cntlocation).getPrice());
 			poInsertSparePartProductPriceTextField[cntlocation].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 7;
+			gbc.gridx = 9;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartProductPriceTextField[cntlocation].addKeyListener(new KeyListener(){
 				@Override
@@ -610,14 +611,14 @@ public class CreateGUIViewerPOViewSparePart {
 			poInsertSparePartDutyCodeTextField[cntlocation] = new JTextField();
 			poInsertSparePartDutyCodeTextField[cntlocation].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 8;
+			gbc.gridx = 10;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartDutyCodeTextField[cntlocation], gbc);
 			
 			poInsertSparePartProductFixedCostTextField[cntlocation] = new JTextField(sparepartOrderItemStatement.get(cntlocation).getFixedcost());
 			poInsertSparePartProductFixedCostTextField[cntlocation].setEditable(false);
 			gbc.gridwidth = 1;
-			gbc.gridx = 9;
+			gbc.gridx = 11;
 			gbc.gridy = 202 + cntlocation * 1000;
 			poInsertSparePartPanel.add(poInsertSparePartProductFixedCostTextField[cntlocation], gbc);
 
@@ -730,7 +731,7 @@ public class CreateGUIViewerPOViewSparePart {
 			}
 			
 			poJSeparator[cntlocation] = new JSeparator(JSeparator.HORIZONTAL);
-			gbc.gridwidth = 10;
+			gbc.gridwidth = 12;
 			gbc.gridx = 0;
 			gbc.gridy = 203 + cntlocation * 1000 + 200;
 			poInsertSparePartPanel.add(poJSeparator[cntlocation], gbc);
