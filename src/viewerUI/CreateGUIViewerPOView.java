@@ -560,7 +560,7 @@ public class CreateGUIViewerPOView {
 				addsql = " AND";
 				sql = sql + addsql;
 			}
-			addsql = " sparepartPurchaseOrder.vendor = \'" + poViewVendorTextField.getText() + "\'";
+			addsql = " sparepartPurchaseOrder.vendor like \'%" + poViewVendorTextField.getText() + "%\'";
 			sql = sql + addsql;
 			cnt++;
 		}
@@ -612,7 +612,7 @@ public class CreateGUIViewerPOView {
 				addsql = " AND";
 				sql = sql + addsql;
 			}
-			addsql = " toolingPurchaseOrder.vendor = \'" + poViewVendorTextField.getText() + "\'";
+			addsql = " toolingPurchaseOrder.vendor like \'%" + poViewVendorTextField.getText() + "%\'";
 			sql = sql + addsql;
 			cnt++;
 		}
@@ -664,7 +664,7 @@ public class CreateGUIViewerPOView {
 				addsql = " AND";
 				sql = sql + addsql;
 			}
-			addsql = " miscPurchaseOrder.vendor = \'" + poViewVendorTextField.getText() + "\'";
+			addsql = " miscPurchaseOrder.vendor like \'%" + poViewVendorTextField.getText() + "%\'";
 			sql = sql + addsql;
 			cnt++;
 		}

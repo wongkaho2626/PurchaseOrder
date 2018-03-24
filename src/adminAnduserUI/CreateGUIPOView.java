@@ -619,7 +619,7 @@ public class CreateGUIPOView {
 				addsql = " AND";
 				sql = sql + addsql;
 			}
-			addsql = " toolingPurchaseOrder.vendor = \'%" + poViewVendorTextField.getText() + "%\'";
+			addsql = " toolingPurchaseOrder.vendor like \'%" + poViewVendorTextField.getText() + "%\'";
 			sql = sql + addsql;
 			cnt++;
 		}
@@ -671,7 +671,7 @@ public class CreateGUIPOView {
 				addsql = " AND";
 				sql = sql + addsql;
 			}
-			addsql = " miscPurchaseOrder.vendor = \'%" + poViewVendorTextField.getText() + "%\'";
+			addsql = " miscPurchaseOrder.vendor like \'%" + poViewVendorTextField.getText() + "%\'";
 			sql = sql + addsql;
 			cnt++;
 		}
