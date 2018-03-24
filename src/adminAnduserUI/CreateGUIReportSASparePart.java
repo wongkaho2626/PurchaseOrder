@@ -39,6 +39,8 @@ public class CreateGUIReportSASparePart {
 	private JLabel reportLabel;
 	private JTextField startETDTextField;
 	private JTextField endETDTextField;
+	private JTextField productNoTextField;
+	private JTextField poNoTextField;
 	private JComboBox selectVendorComboBox;
 	
 	private JTable poTable;
@@ -78,7 +80,7 @@ public class CreateGUIReportSASparePart {
 		gbc.insets = new Insets(5, 5, 5, 5);
 		reportPanel.add(reportLabel, gbc);
 		
-		reportLabel = new JLabel("ETD (MM/DD/YY): ");
+		reportLabel = new JLabel("ETD (MM/DD/YY)*: ");
 		gbc.ipady = 10;
 		gbc.ipadx = 50;
 		gbc.gridwidth = 4;
@@ -153,7 +155,7 @@ public class CreateGUIReportSASparePart {
 		});
 		reportPanel.add(endETDTextField, gbc);
 		
-		reportLabel = new JLabel("Vendor: ");
+		reportLabel = new JLabel("Vendor*: ");
 		gbc.ipady = 10;
 		gbc.ipadx = 50;
 		gbc.gridwidth = 4;
@@ -174,6 +176,35 @@ public class CreateGUIReportSASparePart {
 		gbc.gridx = 4;
 		gbc.gridy = 100003;
 		reportPanel.add(selectVendorComboBox, gbc);
+		
+		reportLabel = new JLabel("Part No: ");
+		gbc.ipady = 10;
+		gbc.ipadx = 50;
+		gbc.gridwidth = 4;
+		gbc.gridx = 0;
+		gbc.gridy = 100004;
+		reportPanel.add(reportLabel, gbc);
+		
+		productNoTextField = new JTextField();
+		gbc.gridwidth = 4;
+		gbc.gridx = 4;
+		gbc.gridy = 100004;
+		reportPanel.add(productNoTextField, gbc);
+		
+		reportLabel = new JLabel("Purchase Order number: ");
+		gbc.ipady = 10;
+		gbc.ipadx = 50;
+		gbc.gridwidth = 4;
+		gbc.gridx = 0;
+		gbc.gridy = 100005;
+		reportPanel.add(reportLabel, gbc);
+		
+		poNoTextField = new JTextField();
+		gbc.gridwidth = 4;
+		gbc.gridx = 4;
+		gbc.gridy = 100005;
+		reportPanel.add(poNoTextField, gbc);
+		
 		
 		poTable = new JTable(){
 			/**
@@ -203,7 +234,7 @@ public class CreateGUIReportSASparePart {
 			
 		};
 		 ((JComponent) poTable.getDefaultRenderer(Boolean.class)).setOpaque(true);
-		
+		 
 		reportButton = new JButton("Report");
 		gbc.ipadx = 0;
 		gbc.gridwidth = 2;
@@ -220,13 +251,19 @@ public class CreateGUIReportSASparePart {
 							+ "FROM sparepartOrderItem, maintenance "
 							+ "WHERE sparepartOrderItem.PRODUCT = maintenance.PRODUCT "
 							+ "AND sparepartOrderItem.SAremain > 0 "
-								+ "AND sparepartOrderItem.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
-									+ "AND sparepartOrderItem.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') ";
+							+ "AND sparepartOrderItem.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
+							+ "AND sparepartOrderItem.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') ";
 					if(!StringUtils.isEmptyOrWhitespaceOnly(selectVendorComboBox.getSelectedItem().toString())){
 						sql = sql + "AND sparepartOrderItem.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' ";
 					}
-						sql = sql + "ORDER BY sparepartOrderItem.poNumber, sparepartOrderItem.PRODUCT, "
-								+ "sparepartOrderItem.vendor, sparepartOrderItem.ETD";
+					if(!StringUtils.isNullOrEmpty(productNoTextField.getText())) {
+						sql = sql + "AND sparepartOrderItem.PRODUCT = \'" + productNoTextField.getText() + "\' ";
+					}
+					if(!StringUtils.isNullOrEmpty(poNoTextField.getText())) {
+						sql = sql + "AND sparepartOrderItem.poNumber = \'" + poNoTextField.getText() + "\' ";
+					}
+					sql = sql + "ORDER BY sparepartOrderItem.PRODUCT, sparepartOrderItem.poNumber, "
+							+ "sparepartOrderItem.vendor, sparepartOrderItem.ETD";
 					System.out.println(sql);
 					IRBS irbs = new IRBS();
 					poTable.setModel(irbs.reportSA(sql, 5));
@@ -240,6 +277,8 @@ public class CreateGUIReportSASparePart {
 					endETDTextField.setText(null);
 					startETDTextField.setText(null);
 					endETDTextField.setText(null);
+					productNoTextField.setText(null);
+					poNoTextField.setText(null);
 					try {
 						irbs.getCon().close();
 					} catch (SQLException e1) {
