@@ -60,7 +60,7 @@ public class CreateGUIReportPRODUCTDataBase {
 		// ========================= reportPanel Level One UI Create
 		// =========================
 		
-		reportLabel = new JLabel("Vendor PRODUCT Database Report");
+		reportLabel = new JLabel("Vendor PRODUCT Database Report (mainly for checking \"Duty Code\" purpose)");
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		//gbc.ipadx = 100;
 		gbc.gridwidth = 8;

@@ -70,7 +70,7 @@ public class CreateDateVendorReport extends AbstractReport {
 				//create the title of excel file
 				HSSFRow rowhead = sheet.createRow((short)0);
 				reportDateVendorHeaderCellStyle(workbook, rowhead, sheet);
-				rowhead.getCell(0).setCellValue("Vendor & PO Report From " + startOrderDate + " to " + endOrderDate);
+				rowhead.getCell(0).setCellValue("Vendor & PO Report (for checking SA purpose) From " + startOrderDate + " to " + endOrderDate);
 
 				if(data.size() > 0){
 					//build the sub-vendor field

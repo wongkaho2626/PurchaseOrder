@@ -113,8 +113,8 @@ public class CreateViewerGUI {
 		// Initialize the Report Menu and the Item(s)
 		// Add it to Menu with .addActionListener
 		reportMenu = new JMenu("Report");
-		reportDateVendorMenuItem = new JMenuItem("Vendor & PO Report");
-		reportPRODUCTDataBaseMenuItem = new JMenuItem("Vendor PRODUCT Database Report");
+		reportDateVendorMenuItem = new JMenuItem("Vendor & PO Report (for checking SA purpose)");
+		reportPRODUCTDataBaseMenuItem = new JMenuItem("Vendor PRODUCT Database Report (mainly for checking \"Duty Code\" purpose)");
 		reportSACompleteUnitMenuItem = new JMenuItem("SA Complete Unit Report");
 		reportSASparePartMenuItem = new JMenuItem("SA Spare Part Report");
 		reportTotalOfUnitsOrderedAndShippedMenuItem = new JMenuItem("Total of Units Ordered and Shipped Report");

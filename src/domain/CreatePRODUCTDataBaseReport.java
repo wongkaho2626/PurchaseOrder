@@ -63,7 +63,7 @@ public class CreatePRODUCTDataBaseReport extends AbstractReport {
 				//create the title of excel file
 				HSSFRow rowhead = sheet.createRow((short)0);
 				reportProductDatabaseHeaderCellStyle(workbook, rowhead, sheet);
-				rowhead.getCell(0).setCellValue("Vendor PRODUCT Database Report");
+				rowhead.getCell(0).setCellValue("Vendor PRODUCT Database Report (mainly for checking \"Duty Code\" purpose");
 
 				if(data.size() > 0){
 					//build the sub-vendor field

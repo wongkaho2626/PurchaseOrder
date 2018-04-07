@@ -61,7 +61,7 @@ public class CreateGUIReportDateVendor {
 		// ========================= reportPanel Level One UI Create
 		// =========================
 		
-		reportLabel = new JLabel("Vendor & PO Report");
+		reportLabel = new JLabel("Vendor & PO Report (for checking SA purpose)");
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		//gbc.ipadx = 100;
 		gbc.gridwidth = 8;

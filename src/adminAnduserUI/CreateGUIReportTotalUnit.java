@@ -58,7 +58,7 @@ public class CreateGUIReportTotalUnit {
 		// ========================= reportPanel Level One UI Create
 		// =========================
 
-		reportLabel = new JLabel("Total Unit Ordered Report");
+		reportLabel = new JLabel("Prediction of Total Units Report");
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		//gbc.ipadx = 100;
 		gbc.gridwidth = 8;

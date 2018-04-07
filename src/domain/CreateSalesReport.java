@@ -90,7 +90,7 @@ public class CreateSalesReport extends AbstractReport{
 				
 				HSSFRow row1 = sheet.createRow((short)1);
 				row1.createCell(0).setCellValue("VENDOR");
-				row1.createCell(1).setCellValue("PART NO");
+				row1.createCell(1).setCellValue("PRODUCT");
 				for(int i = 0; i <= cntmonth; i++){
 					row1.createCell(i+2).setCellValue(monthArray[i]);
 				}
