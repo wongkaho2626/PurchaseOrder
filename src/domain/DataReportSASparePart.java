@@ -1,47 +1,43 @@
 package domain;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class DataReportSASparePart {
-	private String ETD;
-	private String vendor;
 	private String PRODUCT;
 	private int poNumber;
-	private String description;
+	private String Vendor;
+	private int quantity;
+	private int saUnit;
 	private int SAremain;
 	
-	public DataReportSASparePart(String ETD, String vendor, String PRODUCT, int poNumber, String description, int SAremain){
-		this.ETD = ETD;
-		this.vendor = vendor;
+	public DataReportSASparePart(String PRODUCT, int poNumber, String Vendor, int quantity, int saUnit, int SAremain){
 		this.PRODUCT = PRODUCT;
 		this.poNumber = poNumber;
-		this.description = description;
+		this.Vendor = Vendor;
+		this.quantity = quantity;
+		this.saUnit = saUnit;
 		this.SAremain = SAremain;
 	}
 	
-	public String getETD(){
-		return ETD;
-	}
-	
-	public String getvendor(){
-		return vendor;
-	}
-	
-	public String getPRODUCT(){
+	public String getPRODUCT() {
 		return PRODUCT;
 	}
-	
-	public int getpoNumber(){
+
+	public int getPoNumber() {
 		return poNumber;
 	}
-	
-	public String getdescription(){
-		return description;
+
+	public String getVendor() {
+		return Vendor;
 	}
-	
-	public int getSAremain(){
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public int getSaUnit() {
+		return saUnit;
+	}
+
+	public int getSAremain() {
 		return SAremain;
 	}
-	
 }

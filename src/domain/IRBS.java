@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -1443,8 +1445,8 @@ public class IRBS {
 			// data of the table
 			ArrayList<DataReportSASparePart> data = new ArrayList<DataReportSASparePart>();
 			while (connect.rs.next()) {
-				DataReportSASparePart temp = new DataReportSASparePart((String)connect.rs.getObject(1), (String)connect.rs.getObject(2), (String)connect.rs.getObject(3) + (String)connect.rs.getObject(4), (int)connect.rs.getObject(5), (String)connect.rs.getObject(6), (int)connect.rs.getObject(7));
-				data.add(temp);			        
+				DataReportSASparePart temp = new DataReportSASparePart((String)connect.rs.getObject(1), (int)connect.rs.getObject(2), (String)connect.rs.getObject(3), ((BigDecimal)connect.rs.getObject(4)).intValue(), ((BigDecimal)connect.rs.getObject(5)).intValue(), ((BigDecimal)connect.rs.getObject(6)).intValue());
+				data.add(temp);
 			}
 			return data;
 		}catch(Exception ex){
