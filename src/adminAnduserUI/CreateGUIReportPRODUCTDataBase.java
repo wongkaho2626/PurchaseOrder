@@ -109,32 +109,41 @@ public class CreateGUIReportPRODUCTDataBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//select the data from complete unit
-				String sql = "SELECT completeunitOrderItem.PRODUCT, completeunitOrderItem.purchaseCode, "
-						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE "
-						+ "FROM completeunitOrderItem, completeunitPurchaseOrder, maintenance "
-						+ "WHERE completeunitPurchaseOrder.poNumber = completeunitOrderItem.poNumber "
-						+ "AND completeunitOrderItem.PRODUCT = maintenance.PRODUCT "
-						+ "AND completeunitPurchaseOrder.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' "
-						+ "GROUP BY completeunitOrderItem.PRODUCT, completeunitOrderItem.purchaseCode, "
-						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE " 
-						+ "ORDER BY `completeunitOrderItem`.`PRODUCT` ASC";
+//				String sql = "SELECT completeunitOrderItem.PRODUCT, completeunitOrderItem.purchaseCode, "
+//						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE "
+//						+ "FROM completeunitOrderItem, completeunitPurchaseOrder, maintenance "
+//						+ "WHERE completeunitPurchaseOrder.poNumber = completeunitOrderItem.poNumber "
+//						+ "AND completeunitOrderItem.PRODUCT = maintenance.PRODUCT "
+//						+ "AND completeunitPurchaseOrder.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' "
+//						+ "GROUP BY completeunitOrderItem.PRODUCT, completeunitOrderItem.purchaseCode, "
+//						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE " 
+//						+ "ORDER BY `completeunitOrderItem`.`PRODUCT` ASC";
+//				
+//				//select the data from spare part
+//				String sql2 = "SELECT sparepartOrderItem.PRODUCT, maintenance.purchaseCode, "
+//						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE "
+//						+ "FROM sparepartOrderItem, sparepartPurchaseOrder, maintenance "
+//						+ "WHERE sparepartPurchaseOrder.poNumber = sparepartOrderItem.poNumber "
+//						+ "AND sparepartOrderItem.PRODUCT = maintenance.PRODUCT "
+//						+ "AND sparepartPurchaseOrder.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' "
+//						+ "GROUP BY sparepartOrderItem.PRODUCT, maintenance.purchaseCode, "
+//						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE " 
+//						+ "ORDER BY `sparepartOrderItem`.`PRODUCT` ASC";
 				
-				//select the data from spare part
-				String sql2 = "SELECT sparepartOrderItem.PRODUCT, maintenance.purchaseCode, "
+				//from maintenance
+				String sql = "SELECT maintenance.PRODUCT, maintenance.purchaseCode, "
 						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE "
-						+ "FROM sparepartOrderItem, sparepartPurchaseOrder, maintenance "
-						+ "WHERE sparepartPurchaseOrder.poNumber = sparepartOrderItem.poNumber "
-						+ "AND sparepartOrderItem.PRODUCT = maintenance.PRODUCT "
-						+ "AND sparepartPurchaseOrder.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' "
-						+ "GROUP BY sparepartOrderItem.PRODUCT, maintenance.purchaseCode, "
-						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE " 
-						+ "ORDER BY `sparepartOrderItem`.`PRODUCT` ASC";
+						+ "FROM maintenance "
+						+ "WHERE maintenance.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' "
+						+ "GROUP BY maintenance.purchaseCode, maintenance.DESCRIPTION, maintenance.DUTY_CODE " 
+						+ "ORDER BY `maintenance`.`PRODUCT` ASC";
+				
 				IRBS irbs = new IRBS();
 				data = new ArrayList<DataReportPRODUCTDataBase>();
-				data2 = new ArrayList<DataReportPRODUCTDataBase>();
+//				data2 = new ArrayList<DataReportPRODUCTDataBase>();
 				data = irbs.reportPRODUCTDataBase(sql);
-				data2 = irbs.reportPRODUCTDataBase(sql2);
-				data.addAll(data2);
+//				data2 = irbs.reportPRODUCTDataBase(sql2);
+//				data.addAll(data2);
 				createReport = new CreatePRODUCTDataBaseReport(data, selectVendorComboBox.getSelectedItem().toString());
 				try {
 					irbs.getCon().close();
