@@ -1,13 +1,19 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellRangeAddress;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 
 public abstract class AbstractReport {
+	HashMap<String, HSSFCellStyle> styleMap = new HashMap<String, HSSFCellStyle>();
 	
 	protected void headerCellStyle(HSSFWorkbook workbook, HSSFRow rowhead, HSSFSheet sheet, int cntmonth){
 		sheet.addMergedRegion(new CellRangeAddress(0,0,0,cntmonth+2));
@@ -129,28 +135,35 @@ public abstract class AbstractReport {
 			rowhead.getCell(i).setCellStyle(cellStyle);
 		}
 	}
-	
+		
 	protected void reportDateVendorRowWithBorderCellStyle(HSSFWorkbook workbook, HSSFRow row, HSSFSheet sheet, int column, boolean top, boolean bottom, boolean left, boolean right, boolean ALIGN_LEFT, boolean ALIGN_RIGHT, int columnWidth){
-		HSSFCellStyle cellStyle = workbook.createCellStyle();
-		if(top){
-			cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+		HSSFCellStyle cellStyle;
+		CellStyleObject cellStyleObject = new CellStyleObject(top, bottom, left, right, ALIGN_LEFT, ALIGN_RIGHT);
+		if(styleMap.containsKey(cellStyleObject.getResult())) {
+			cellStyle = styleMap.get(cellStyleObject.getResult());
+		}else {
+			cellStyle = workbook.createCellStyle();
+			if(top){
+				cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+			}
+			if(bottom){
+				cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+			}
+			if(left){
+				cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+			}
+			if(right){
+				cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+			}
+			if(ALIGN_LEFT){
+				cellStyle.setAlignment(CellStyle.ALIGN_LEFT);
+			}
+			if(ALIGN_RIGHT){
+				cellStyle.setAlignment(CellStyle.ALIGN_RIGHT);
+			}
+			cellStyle.setWrapText(true);
+			styleMap.put(cellStyleObject.getResult(), cellStyle);
 		}
-		if(bottom){
-			cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-		}
-		if(left){
-			cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-		}
-		if(right){
-			cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
-		}
-		if(ALIGN_LEFT){
-			cellStyle.setAlignment(CellStyle.ALIGN_LEFT);
-		}
-		if(ALIGN_RIGHT){
-			cellStyle.setAlignment(CellStyle.ALIGN_RIGHT);
-		}
-		cellStyle.setWrapText(true);
 		row.getCell(column).setCellStyle(cellStyle);
 		sheet.setColumnWidth(column, columnWidth);
 	}
