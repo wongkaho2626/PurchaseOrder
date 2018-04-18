@@ -1634,8 +1634,8 @@ public class CreateGUIPOSparePartChange {
 					check = false;
 				if(poInsertSparePartSAUnitTextField[i][j].getText().equals(""))
 					check = false;
-				if(poInsertSparePartSAETDTextField[i][j].getText().equals(""))
-					check = false;
+//				if(poInsertSparePartSAETDTextField[i][j].getText().equals(""))
+//					check = false;
 			}
 		}
 		return check;

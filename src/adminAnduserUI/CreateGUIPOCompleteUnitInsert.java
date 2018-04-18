@@ -1462,8 +1462,8 @@ public class CreateGUIPOCompleteUnitInsert {
 					check = false;
 				if(poInsertCompleteUnitSAUnitTextField[i][j].getText().equals(""))
 					check = false;
-				if(poInsertCompleteUnitSAETDTextField[i][j].getText().equals(""))
-					check = false;
+//				if(poInsertCompleteUnitSAETDTextField[i][j].getText().equals(""))
+//					check = false;
 			}
 		}
 		for(int i = 0; i <= cntCompleteUnitShipment; i++){
