@@ -1,7 +1,5 @@
 package UI;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -10,13 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.util.Properties;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -79,7 +80,28 @@ public class CreateGUILogin {
 		//testing
 //		loginStaffIDTextField.setText("admin");
 //		loginPasswordTextField.setText("password");
-		ipTextField.setText("localhost");
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+		try {
+			input = new FileInputStream(".leeray.config.properties");
+
+			// load a properties file
+			prop.load(input);
+			ipTextField.setText(prop.getProperty("ip"));
+			portTextField.setText(prop.getProperty("port"));
+			
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private void createFrame() {
@@ -219,7 +241,12 @@ public class CreateGUILogin {
 		gbc.gridy = 4;
 		IPPanel.add(loginLabel, gbc);
 		
-		ipTextField = new JTextField("192.168.1.101");
+//		ipTextField = new JTextField("192.168.1.101");
+//		gbc.gridx = 1;
+//		gbc.gridy = 4;
+//		IPPanel.add(ipTextField, gbc);
+		
+		ipTextField = new JTextField("localhost");
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		IPPanel.add(ipTextField, gbc);
@@ -238,7 +265,12 @@ public class CreateGUILogin {
 		loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				login();
+				try {
+					login();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -268,7 +300,29 @@ public class CreateGUILogin {
 		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	private void login() {
+	private void login() throws IOException {
+		Properties prop = new Properties();
+		OutputStream output = null;
+		try {
+			output = new FileOutputStream(".leeray.config.properties");
+			// set the properties value
+			prop.setProperty("ip", ipTextField.getText());
+			prop.setProperty("port", portTextField.getText());
+
+			// save properties to project root folder
+			prop.store(output, null);
+		} catch (IOException io) {
+			io.printStackTrace();
+		} finally {
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+	  }
+		
 		IPandPort IPandPort = new IPandPort();
 		IPandPort.setIP(ipTextField.getText());
 		IPandPort.setPort(portTextField.getText());
