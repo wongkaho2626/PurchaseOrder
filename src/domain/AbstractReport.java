@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -136,7 +137,7 @@ public abstract class AbstractReport {
 		}
 	}
 		
-	protected void reportDateVendorRowWithBorderCellStyle(HSSFWorkbook workbook, HSSFRow row, HSSFSheet sheet, int column, boolean top, boolean bottom, boolean left, boolean right, boolean ALIGN_LEFT, boolean ALIGN_RIGHT, int columnWidth){
+	protected void reportDateVendorRowWithBorderCellStyle(HSSFWorkbook workbook, HSSFRow row, HSSFSheet sheet, int column, boolean top, boolean bottom, boolean left, boolean right, boolean ALIGN_LEFT, boolean ALIGN_RIGHT, int columnWidth, boolean numberType){
 		HSSFCellStyle cellStyle;
 		CellStyleObject cellStyleObject = new CellStyleObject(top, bottom, left, right, ALIGN_LEFT, ALIGN_RIGHT);
 		if(styleMap.containsKey(cellStyleObject.getResult())) {
@@ -160,6 +161,9 @@ public abstract class AbstractReport {
 			}
 			if(ALIGN_RIGHT){
 				cellStyle.setAlignment(CellStyle.ALIGN_RIGHT);
+			}
+			if(numberType) {
+				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
 			}
 			cellStyle.setWrapText(true);
 			styleMap.put(cellStyleObject.getResult(), cellStyle);
