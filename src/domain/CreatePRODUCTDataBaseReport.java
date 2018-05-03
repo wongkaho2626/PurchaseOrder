@@ -72,24 +72,24 @@ public class CreatePRODUCTDataBaseReport extends AbstractReport {
 
 					row = sheet.createRow((short)3);
 					row.createCell(0).setCellValue("PART NO");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, true, false, false, true, false, 3000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, true, false, false, true, false, 3000, false, false);
 					row.createCell(1).setCellValue("PURCHASE CODE");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, true, false, false, true, false, 6000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, true, false, false, true, false, 6000, false, false);
 					row.createCell(2).setCellValue("DESCRIPTION");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, true, false, false, true, false, 9000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, true, false, false, true, false, 9000, false, false);
 					row.createCell(3).setCellValue("DUTY CODE");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, true, false, false, true, false, 4000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, true, false, false, true, false, 4000, false, false);
 
 					while(cntData < data.size()){
 						row = sheet.createRow((short)cntColumn);
 						row.createCell(0).setCellValue(data.get(cntData).getPRODUCT());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, false, false, false, true, false, 3000, false);
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, false, false, false, true, false, 3000, false, false);
 						row.createCell(1).setCellValue(data.get(cntData).getpurchaseCode());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, false, false, false, true, false, 6000, false);
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, false, false, false, true, false, 6000, false, false);
 						row.createCell(2).setCellValue(data.get(cntData).getDESCRIPTION());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, false, false, false, true, false, 9000, false);
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, false, false, false, true, false, 9000, false, false);
 						row.createCell(3).setCellValue(data.get(cntData).getDUTY_CODE());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, false, false, false, true, false, 4000, false);
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, false, false, false, true, false, 4000, false, false);
 
 						cntData++;
 						cntColumn++;

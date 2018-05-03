@@ -74,33 +74,45 @@ public class CreateSASparePartReport extends AbstractReport {
 					//build the sub-vendor field
 					row = sheet.createRow((short)2);
 					row.createCell(0).setCellValue("PART NO");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, true, false, false, true, false, 3000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, true, false, false, true, false, 3000, false, false);
 					row.createCell(1).setCellValue("PO#");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, true, false, false, true, false, 3000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, true, false, false, true, false, 3000, false, false);
 					row.createCell(2).setCellValue("Vendor");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, true, false, false, true, false, 3000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, true, false, false, true, false, 3000, false, false);
 					row.createCell(3).setCellValue("Order Quantity");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, true, false, false, false, true, 5000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, true, false, false, false, true, 5000, false, false);
 					row.createCell(4).setCellValue("SA Quantity");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, true, false, false, false, true, 5000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, true, false, false, false, true, 5000, false, false);
 					row.createCell(5).setCellValue("SA Remain");
-					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 5, false, true, false, false, false, true, 5000, false);
+					reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 5, false, true, false, false, false, true, 5000, false, false);
 
 					while(cntData < data.size()){
 						row = sheet.createRow((short)cntColumn);
 						row.createCell(0).setCellValue(data.get(cntData).getPRODUCT());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, false, false, false, true, false, 3000, false);
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 0, false, false, false, false, true, false, 3000, false, false);
 						row.createCell(1).setCellValue(data.get(cntData).getPoNumber());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, false, false, false, true, false, 3000, false);
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 1, false, false, false, false, true, false, 3000, false, false);
 						row.createCell(2).setCellValue(data.get(cntData).getVendor());
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, false, false, false, true, false, 3000, false);
-						row.createCell(3).setCellValue(nf.format(data.get(cntData).getQuantity()));
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, false, false, false, false, true, 5000, false);
-						row.createCell(4).setCellValue(nf.format(data.get(cntData).getSaUnit()));
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 5000, false);
-						row.createCell(5).setCellValue(nf.format(data.get(cntData).getSAremain()));
-						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 5, false, false, false, false, false, true, 5000, false);
-
+						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 2, false, false, false, false, true, false, 3000, false, false);
+						row.createCell(3).setCellValue(data.get(cntData).getQuantity());
+						if(data.get(cntData).getQuantity() == 0) {
+							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, false, false, false, false, true, 5000, false, false);
+						}else {
+							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, false, false, false, false, true, 5000, false, true);
+						}
+						row.createCell(4).setCellValue(data.get(cntData).getSaUnit());
+						if(data.get(cntData).getSaUnit() == 0) {
+							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 5000, false, false);
+						}else {
+							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 5000, false, true);
+						}
+						row.createCell(5).setCellValue(data.get(cntData).getSAremain());
+						if(data.get(cntData).getSAremain() == 0) {
+							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 5, false, false, false, false, false, true, 5000, false, false);
+						}else {
+							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 5, false, false, false, false, false, true, 5000, false, true);
+						}
+						
 						cntData++;
 						cntColumn++;
 					}

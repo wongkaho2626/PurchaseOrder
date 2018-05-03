@@ -137,9 +137,9 @@ public abstract class AbstractReport {
 		}
 	}
 		
-	protected void reportDateVendorRowWithBorderCellStyle(HSSFWorkbook workbook, HSSFRow row, HSSFSheet sheet, int column, boolean top, boolean bottom, boolean left, boolean right, boolean ALIGN_LEFT, boolean ALIGN_RIGHT, int columnWidth, boolean numberType){
+	protected void reportDateVendorRowWithBorderCellStyle(HSSFWorkbook workbook, HSSFRow row, HSSFSheet sheet, int column, boolean top, boolean bottom, boolean left, boolean right, boolean ALIGN_LEFT, boolean ALIGN_RIGHT, int columnWidth, boolean priceType, boolean quantityType){
 		HSSFCellStyle cellStyle;
-		CellStyleObject cellStyleObject = new CellStyleObject(top, bottom, left, right, ALIGN_LEFT, ALIGN_RIGHT);
+		CellStyleObject cellStyleObject = new CellStyleObject(top, bottom, left, right, ALIGN_LEFT, ALIGN_RIGHT, priceType, quantityType);
 		if(styleMap.containsKey(cellStyleObject.getResult())) {
 			cellStyle = styleMap.get(cellStyleObject.getResult());
 		}else {
@@ -162,8 +162,11 @@ public abstract class AbstractReport {
 			if(ALIGN_RIGHT){
 				cellStyle.setAlignment(CellStyle.ALIGN_RIGHT);
 			}
-			if(numberType) {
-				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
+			if(priceType) {
+				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("###,###,###,##0.000"));
+			}
+			if(quantityType) {
+				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("###,###,###,##0.000"));
 			}
 			cellStyle.setWrapText(true);
 			styleMap.put(cellStyleObject.getResult(), cellStyle);
