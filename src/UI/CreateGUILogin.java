@@ -84,7 +84,7 @@ public class CreateGUILogin {
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream(".leeray.config.properties");
+			input = new FileInputStream("leeray.config.properties");
 
 			// load a properties file
 			prop.load(input);
@@ -304,7 +304,7 @@ public class CreateGUILogin {
 		Properties prop = new Properties();
 		OutputStream output = null;
 		try {
-			output = new FileOutputStream(".leeray.config.properties");
+			output = new FileOutputStream("leeray.config.properties");
 			// set the properties value
 			prop.setProperty("ip", ipTextField.getText());
 			prop.setProperty("port", portTextField.getText());
@@ -321,8 +321,8 @@ public class CreateGUILogin {
 					e.printStackTrace();
 				}
 			}
-	  }
-		
+		}
+
 		IPandPort IPandPort = new IPandPort();
 		IPandPort.setIP(ipTextField.getText());
 		IPandPort.setPort(portTextField.getText());
@@ -345,10 +345,10 @@ public class CreateGUILogin {
 				loginStaffIDTextField.setText("");
 				loginPasswordTextField.setText("");
 				JOptionPane
-						.showMessageDialog(
-								loginPanel,
-								"Please make sure you have input correct Staff ID and corresponding password!",
-								"Error", JOptionPane.ERROR_MESSAGE);
+				.showMessageDialog(
+						loginPanel,
+						"Please make sure you have input correct Staff ID and corresponding password!",
+						"Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -360,5 +360,4 @@ public class CreateGUILogin {
 			}
 		}
 	}
-
 }

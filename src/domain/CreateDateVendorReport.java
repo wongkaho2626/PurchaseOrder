@@ -110,19 +110,30 @@ public class CreateDateVendorReport extends AbstractReport {
 						}else {
 							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 3, false, false, false, false, false, true, 3000, true, false);
 						}
-						row.createCell(4).setCellValue(Double.parseDouble(data.get(cntData).getfixedcost()));
-						if(Double.parseDouble(data.get(cntData).getfixedcost()) == 0) {
+						
+						if(!isNumeric(data.get(cntData).getfixedcost())) {
+							row.createCell(4).setCellValue(data.get(cntData).getfixedcost());
 							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 4000, false, false);
 						}else {
-							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 4000, true, false);
+							row.createCell(4).setCellValue(Double.parseDouble(data.get(cntData).getfixedcost()));
+							if(Double.parseDouble(data.get(cntData).getfixedcost()) == 0) {
+								reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 4000, false, false);
+							}else {
+								reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 4, false, false, false, false, false, true, 4000, true, false);
+							}
 						}
 						row.createCell(5).setCellValue(data.get(cntData).getDUTY_CODE());
 						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 5, false, false, false, false, false, true, 4000, false, false);
-						row.createCell(6).setCellValue(Double.parseDouble(data.get(cntData).getdeposit()));
-						if(Double.parseDouble(data.get(cntData).getdeposit()) == 0) {
+						if(!isNumeric(data.get(cntData).getdeposit())) {
+							row.createCell(6).setCellValue(data.get(cntData).getdeposit());
 							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 6, false, false, false, false, false, true, 3000, false, false);
 						}else {
-							reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 6, false, false, false, false, false, true, 3000, true, false);
+							row.createCell(6).setCellValue(Double.parseDouble(data.get(cntData).getdeposit()));
+							if(Double.parseDouble(data.get(cntData).getdeposit()) == 0) {
+								reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 6, false, false, false, false, false, true, 3000, false, false);
+							}else {
+								reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 6, false, false, false, false, false, true, 3000, true, false);
+							}
 						}
 						row.createCell(7).setCellValue(data.get(cntData).getVendor());
 						reportDateVendorRowWithBorderCellStyle(workbook, row, sheet, 7, false, false, false, false, false, true, 3000, false, false);
@@ -155,9 +166,21 @@ public class CreateDateVendorReport extends AbstractReport {
 					errorPanel,
 					ex,
 					"Error", JOptionPane.ERROR_MESSAGE);
-			System.out.println("EEE:" + ex);
+			
 
 		}
+	}
+	
+	public static boolean isNumeric(String str)  {  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
 	}
 }
 

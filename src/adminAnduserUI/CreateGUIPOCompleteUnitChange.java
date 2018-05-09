@@ -1641,7 +1641,9 @@ public class CreateGUIPOCompleteUnitChange {
 									irbs.insertCompleteUnitOrderItem(Integer.parseInt(poInsertCompleteUnitNoTextField.getText()), poInsertCompleteUnitProductNoTextField[i].getText(), poInsertCompleteUnitProductSubCodeTextField[i].getText(), Integer.parseInt(poInsertCompleteUnitProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertCompleteUnitProductPriceTextField[i].getText()), poInsertCompleteUnitProductFixedCostTextField[i].getText(), poInsertCompleteUnitProductPurchaseCodeTextField[i].getText(), "", Integer.parseInt(poInsertCompleteUnitProductQuantityTextField[i].getText().replace(",", "")));
 								}
 								for(int j = 0; j <= cntCompleteUnitSA[i]; j++){
-									ChangedDate3 = poInsertCompleteUnitSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(3, 5);
+									ChangedDate3 = null;
+									if(!poInsertCompleteUnitSAETDTextField[i][j].getText().isEmpty())
+										ChangedDate3 = poInsertCompleteUnitSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(3, 5);
 									irbs.insertSA(Integer.parseInt(poInsertCompleteUnitNoTextField.getText()),poInsertCompleteUnitSANoTextField[i][j].getText(),poInsertCompleteUnitProductNoTextField[i].getText() + poInsertCompleteUnitProductSubCodeTextField[i].getText(),poInsertCompleteUnitSAInvoiceNoTextField[i][j].getText(),Integer.parseInt(poInsertCompleteUnitSAUnitTextField[i][j].getText().replace(",", "")), ChangedDate3);
 								}
 							}
@@ -1767,15 +1769,17 @@ public class CreateGUIPOCompleteUnitChange {
 		}
 		for(int i = 0; i <= cntCompleteUnitProduct; i++){
 			for(int j = 0; j <= cntCompleteUnitSA[i]; j++){
-				try {
-					sdf.setLenient(false);
-					java.util.Date date = sdf.parse(poInsertCompleteUnitSAETDTextField[i][j].getText());
-					java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-					String ChangedDate = poInsertCompleteUnitSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(3, 5);
-				} catch (ParseException e1) {
-					exception = e1;
-				} catch (Exception e1){
-					exception = e1;
+				if(!poInsertCompleteUnitSAETDTextField[i][j].getText().isEmpty()) {
+					try {
+						sdf.setLenient(false);
+						java.util.Date date = sdf.parse(poInsertCompleteUnitSAETDTextField[i][j].getText());
+						java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+						String ChangedDate = poInsertCompleteUnitSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertCompleteUnitSAETDTextField[i][j].getText().substring(3, 5);
+					} catch (ParseException e1) {
+						exception = e1;
+					} catch (Exception e1){
+						exception = e1;
+					}
 				}
 			}
 		}

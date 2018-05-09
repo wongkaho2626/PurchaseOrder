@@ -1555,7 +1555,9 @@ public class CreateGUIPOSparePartChange {
 									irbs.insertSparePartOrderItem(Integer.parseInt(poInsertSparePartNoTextField.getText()), poInsertSparePartProductNoTextField[i].getText(), poInsertSparePartSubCodeTextField[i].getText(), Integer.parseInt(poInsertSparePartProductQuantityTextField[i].getText().replace(",", "")), Double.parseDouble(poInsertSparePartProductPriceTextField[i].getText()), poInsertSparePartProductVendorTextField[i].getText(), Double.parseDouble(poInsertSparePartProductFixedCostTextField[i].getText()), Integer.parseInt(poInsertSparePartProductQuantityTextField[i].getText().replace(",", "")), ChangedDate, ChangedDate2);
 								}
 								for(int j = 0; j <= cntSparePartSA[i]; j++){
-									ChangedDate3 = poInsertSparePartSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(3, 5);
+									ChangedDate3 = null;
+									if(!poInsertSparePartSAETDTextField[i][j].getText().isEmpty())
+										ChangedDate3 = poInsertSparePartSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(3, 5);
 									irbs.insertSA(Integer.parseInt(poInsertSparePartNoTextField.getText()), poInsertSparePartSANoTextField[i][j].getText(), poInsertSparePartProductNoTextField[i].getText() + poInsertSparePartSubCodeTextField[i].getText(), poInsertSparePartSAInvoiceNoTextField[i][j].getText(), Integer.parseInt(poInsertSparePartSAUnitTextField[i][j].getText().replace(",", "")), ChangedDate3);
 								}
 							}
@@ -1684,15 +1686,17 @@ public class CreateGUIPOSparePartChange {
 		}
 		for(int i = 0; i <= cntSparePartProduct; i++){
 			for(int j = 0; j <= cntSparePartSA[i]; j++){
-				try {
-					sdf.setLenient(false);
-					java.util.Date date = sdf.parse(poInsertSparePartSAETDTextField[i][j].getText());
-					java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-					String ChangedDate = poInsertSparePartSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(3, 5);
-				} catch (ParseException e1) {
-					exception = e1;
-				} catch (Exception e1){
-					exception = e1;
+				if(!poInsertSparePartSAETDTextField[i][j].getText().isEmpty()) {
+					try {
+						sdf.setLenient(false);
+						java.util.Date date = sdf.parse(poInsertSparePartSAETDTextField[i][j].getText());
+						java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+						String ChangedDate = poInsertSparePartSAETDTextField[i][j].getText().substring(6, 8) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(0, 2) + "/" + poInsertSparePartSAETDTextField[i][j].getText().substring(3, 5);
+					} catch (ParseException e1) {
+						exception = e1;
+					} catch (Exception e1){
+						exception = e1;
+					}
 				}
 			}
 		}

@@ -166,7 +166,7 @@ public abstract class AbstractReport {
 				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("###,###,###,##0.000"));
 			}
 			if(quantityType) {
-				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("###,###,###,##0.000"));
+				cellStyle.setDataFormat(workbook.createDataFormat().getFormat("###,###,###,##0"));
 			}
 			cellStyle.setWrapText(true);
 			styleMap.put(cellStyleObject.getResult(), cellStyle);
