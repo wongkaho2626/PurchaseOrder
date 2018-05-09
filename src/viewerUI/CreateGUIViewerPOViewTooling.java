@@ -707,17 +707,16 @@ public class CreateGUIViewerPOViewTooling {
 
 
 		for( int i = 0; i <= cntToolingProduct; i++){
-			if(!poInsertToolingProductQuantityTextField[i].getText().equals("") && !notInteger(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")) && !poInsertToolingProductPriceTextField[i].getText().equals("") && !notDouble(poInsertToolingProductPriceTextField[i].getText())){
+			if(!poInsertToolingProductQuantityTextField[i].getText().equals("") && !notInteger(poInsertToolingProductQuantityTextField[i].getText().replace(",", "")) && !poInsertToolingProductPriceTextField[i].getText().replace(",", "").equals("") && !notDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", ""))){
 				quantity[i] = Integer.parseInt(poInsertToolingProductQuantityTextField[i].getText().replace(",", ""));
-				price[i] = Double.parseDouble(poInsertToolingProductPriceTextField[i].getText());
+				price[i] = Double.parseDouble(poInsertToolingProductPriceTextField[i].getText().replace(",", ""));
 				totalprice[i] = quantity[i] * price[i];
 			}
 		}
 
 		tp = totalprice[0] + totalprice[1] + totalprice[2] + totalprice[3] + totalprice[4] + totalprice[5] + totalprice[6] + totalprice[7] + totalprice[8] + totalprice[9];
 
-		NumberFormat nf = new DecimalFormat("###,###,###,###,###.##");
-		System.out.println("total price: " + nf.format(tp));
+		DecimalFormat nf = new DecimalFormat("###,###,###,###,##0.00");
 
 		poInsertToolingTotalPriceTextField.setText(nf.format(tp));
 	}
