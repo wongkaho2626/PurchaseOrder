@@ -1,13 +1,14 @@
 package domain;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -24,15 +25,33 @@ public class Restoredbtosql {
 	private static String database = "leeray";
 	private static String user = "root";
 	private static String pass = "root";
-	private static String path = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql";
+//	private static String path = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql";
 	
 	//for development
-//	private static String path = "/Applications/MAMP/Library/bin/mysql";
+	private static String path = "/Applications/MAMP/Library/bin/mysql";
 
 	public static boolean restore() throws SQLException{
-		IPandPort IPandPort = new IPandPort();
-		ip = IPandPort.getIP();
-		port = IPandPort.getPort();
+		Properties prop = new Properties();
+		InputStream input = null;
+		try {
+			input = new FileInputStream("leeray.config.properties");
+
+			// load a properties file
+			prop.load(input);
+			ip = prop.getProperty("ip");
+			port = prop.getProperty("port");
+			
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
 		//for development
 //		ip = "localhost";
