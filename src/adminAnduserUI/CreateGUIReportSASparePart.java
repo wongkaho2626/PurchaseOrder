@@ -254,7 +254,7 @@ public class CreateGUIReportSASparePart {
 							+ "FROM sparepartorderitem "
 							+ "WHERE sparepartOrderItem.ETD >= STR_TO_DATE(\'" + startETDTextField.getText() + "\', '%m/%d/%Y') "
 							+ "AND sparepartOrderItem.ETD <= STR_TO_DATE(\'" + endETDTextField.getText() + "\', '%m/%d/%Y') "
-							+ "GROUP BY sparepartorderitem.PRODUCT "
+							+ "GROUP BY sparepartorderitem.poNumber "
 							+ "ORDER BY sparepartOrderItem.PRODUCT, sparepartOrderItem.poNumber ASC";
 					
 					System.out.println(sql);
