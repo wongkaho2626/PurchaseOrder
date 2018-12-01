@@ -135,7 +135,6 @@ public class CreateGUIReportPRODUCTDataBase {
 						+ "maintenance.DESCRIPTION, maintenance.DUTY_CODE "
 						+ "FROM maintenance "
 						+ "WHERE maintenance.vendor = \'" + selectVendorComboBox.getSelectedItem().toString() + "\' "
-						+ "GROUP BY maintenance.purchaseCode, maintenance.DESCRIPTION, maintenance.DUTY_CODE " 
 						+ "ORDER BY `maintenance`.`PRODUCT` ASC";
 				
 				IRBS irbs = new IRBS();
@@ -143,7 +142,7 @@ public class CreateGUIReportPRODUCTDataBase {
 //				data2 = new ArrayList<DataReportPRODUCTDataBase>();
 				data = irbs.reportPRODUCTDataBase(sql);
 //				data2 = irbs.reportPRODUCTDataBase(sql2);
-//				data.addAll(data2);
+//				data.addAll(data2);s
 				createReport = new CreatePRODUCTDataBaseReport(data, selectVendorComboBox.getSelectedItem().toString());
 				try {
 					irbs.getCon().close();
