@@ -182,6 +182,7 @@ public class CreateGUIReportTotalOfUnitsOrderedAndShipped {
 								+ "AND completeunitPurchaseOrder.orderDate <= STR_TO_DATE(\'" + endDateTextField.getText() + "\', '%m/%d/%Y') "
 								+ "AND completeunitOrderItem.PRODUCT = \"" + partNoTextField.getText() + "\"";
 						OrderedsqlList.add(completeunitQuantitysql);
+						System.out.println(completeunitQuantitysql);
 						
 						//get the spare part data with purchase order date
 						String sparepartQuantitysql = "SELECT SUM(sparepartOrderItem.quantity) AS quantity "
@@ -191,24 +192,7 @@ public class CreateGUIReportTotalOfUnitsOrderedAndShipped {
 								+ "AND sparepartPurchaseOrder.orderDate <= STR_TO_DATE(\'" + endDateTextField.getText() + "\', '%m/%d/%Y') "
 								+ "AND sparepartOrderItem.PRODUCT = \"" + partNoTextField.getText() + "\"";
 						OrderedsqlList.add(sparepartQuantitysql);
-						
-						//get the tooling data with purchase order date
-						String toolingQuantitysql = "SELECT SUM(toolingOrderItem.quantity) AS quantity "
-								+ "FROM toolingPurchaseOrder, toolingOrderItem "
-								+ "WHERE toolingOrderItem.poNumber = toolingPurchaseOrder.poNumber "
-								+ "AND toolingPurchaseOrder.orderDate >= STR_TO_DATE(\'"+ startDateTextField.getText() + "\', '%m/%d/%Y') "
-								+ "AND toolingPurchaseOrder.orderDate <= STR_TO_DATE(\'" + endDateTextField.getText() + "\', '%m/%d/%Y') "
-								+ "AND toolingOrderItem.PRODUCT = \"" + partNoTextField.getText() + "\"";
-						OrderedsqlList.add(toolingQuantitysql);
-						
-						//get the misc data with purchase order date
-						String miscQuantitysql = "SELECT SUM(miscOrderItem.quantity) AS quantity "
-								+ "FROM miscPurchaseOrder, miscOrderItem "
-								+ "WHERE miscOrderItem.poNumber = miscPurchaseOrder.poNumber "
-								+ "AND miscPurchaseOrder.orderDate >= STR_TO_DATE(\'"+ startDateTextField.getText() + "\', '%m/%d/%Y') "
-								+ "AND miscPurchaseOrder.orderDate <= STR_TO_DATE(\'" + endDateTextField.getText() + "\', '%m/%d/%Y') "
-								+ "AND miscOrderItem.PRODUCT = \"" + partNoTextField.getText() + "\"";
-						OrderedsqlList.add(miscQuantitysql);
+						System.out.println(sparepartQuantitysql);
 						
 						//get the complete unit data with purchase order date
 						String completeunitQuantitysql2 = "SELECT SUM(sa.saUnit) AS quantity "
